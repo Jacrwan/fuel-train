@@ -109,7 +109,34 @@ window.App = window.App || {};
       console.warn("store load failed, using defaults", e);
       state = defaults();
     }
+    if (relinkLogs() > 0) save();
     return state;
+  }
+
+  function looseKey(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+
+  /* Re-attach workout logs whose exercise key drifted from the program's current
+     id (e.g. after an AI program rewrite regenerated ids). Matches on a loose
+     form of the exercise name, so "pushups" / "push-ups" / "Push Ups" reconcile.
+     Returns the number of log keys moved. */
+  function relinkLogs() {
+    var map = {};
+    Object.keys(state.program || {}).forEach(function (wd) {
+      (state.program[wd] || []).forEach(function (ex) { map[looseKey(ex.name)] = ex.id; });
+    });
+    var moved = 0;
+    Object.keys(state.logs || {}).forEach(function (date) {
+      var day = state.logs[date];
+      Object.keys(day).forEach(function (k) {
+        var canonical = map[looseKey(k)];
+        if (canonical && canonical !== k) {
+          day[canonical] = (day[canonical] || []).concat(day[k]);
+          delete day[k];
+          moved++;
+        }
+      });
+    });
+    return moved;
   }
 
   function save() {
@@ -126,6 +153,7 @@ window.App = window.App || {};
     get state() { return state; },
     load: load,
     save: save,
+    relinkLogs: relinkLogs,
     reset: function () { state = defaults(); save(); },
     exportJSON: function () { return JSON.stringify(state, null, 2); },
     importJSON: function (text) {

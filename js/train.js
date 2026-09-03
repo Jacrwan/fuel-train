@@ -310,6 +310,7 @@ window.App = window.App || {};
       if (np && typeof np === "object") {
         App.util.WEEKDAYS.forEach(function (wd) { if (!np[wd]) np[wd] = []; });
         App.store.state.program = np;
+        App.store.relinkLogs();
         App.store.save();
         util.closeModal();
         util.toast("Program updated");

@@ -107,6 +107,12 @@ burrito and a coke", "bump protein to 200", "how's my squat trending" all work. 
 and results show inline as chips; changes are applied immediately (no diff gate — it's a
 chat), and the visible tab refreshes. History persists in `localStorage`.
 
+Safety net: the whole store is snapshotted before every Coach message
+(`localStorage["fueltrain.snapshot"]`); **Settings → Undo last Coach change** restores it.
+Program edits keep exercise **ids stable by name**, and `relinkLogs()` (run on load, after
+any program rewrite, and via **Settings → Re-link workout logs**) re-attaches workout logs
+whose exercise key drifted — so an AI program change never silently orphans your history.
+
 > **Key handling:** the USDA and Anthropic keys live only in this browser's
 > `localStorage` and are sent directly to those APIs. This is fine for personal
 > single-user use; anyone with access to the unlocked phone can read them. There is no

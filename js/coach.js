@@ -20,6 +20,11 @@ window.App = window.App || {};
     "describe it. For large or destructive changes (replacing a whole training day, deleting " +
     "several things), briefly say what you did after doing it. Weights are pounds. Keep replies " +
     "short and concrete.\n\n" +
+    "SCOPE: only change the day(s) the user actually names. If they ask about \"today\" or a " +
+    "specific weekday or \"going forward\", that means that one weekday slot in the weekly " +
+    "template — do NOT touch the other days. Only rewrite the whole week if the user explicitly " +
+    "says so (e.g. \"redo my entire program\"). Prefer add_exercise / update_exercise / " +
+    "remove_exercise over set_program_day; use set_program_day only when redesigning one day wholesale.\n\n" +
     "Write in plain text only. Do not use Markdown — no **bold**, no ##/### headings, no *** " +
     "rules, no bullet markdown. Short paragraphs; if you list things use plain lines.";
 
@@ -108,6 +113,13 @@ window.App = window.App || {};
     if (!text || busy) return;
     if (!App.ai.hasKey()) { util.toast("Add your Anthropic API key in Settings"); return; }
 
+    // snapshot the whole store so a bad AI edit can be undone (Settings → Restore)
+    try {
+      localStorage.setItem("fueltrain.snapshot", JSON.stringify({
+        at: Date.now(), note: text.slice(0, 80), state: App.store.state
+      }));
+    } catch (e) {}
+
     if (!App.store.state.chat) App.store.state.chat = [];
     App.store.state.chat.push({ role: "user", content: text });
     App.store.save();
@@ -131,6 +143,7 @@ window.App = window.App || {};
       maxTokens: 2500,
       maxTurns: 10
     }).then(function () {
+      App.store.relinkLogs();
       App.store.save();
     }).catch(function (e) {
       App.store.state.chat.push({ role: "assistant", content: [{ type: "text", text: "⚠️ " + (e.message || e) }] });

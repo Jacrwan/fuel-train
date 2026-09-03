@@ -76,7 +76,29 @@
 
     body.appendChild(el("hr", { class: "sep" }));
     body.appendChild(el("h3", { text: "Data" }));
+
+    // restore the pre-chat snapshot (undo a bad Coach edit)
+    var snap = null;
+    try { snap = JSON.parse(localStorage.getItem("fueltrain.snapshot") || "null"); } catch (e) {}
+    if (snap && snap.state) {
+      body.appendChild(el("button", { class: "btn ghost", style: "margin-bottom:10px",
+        text: "Undo last Coach change", onclick: function () {
+          if (confirm("Restore everything to the snapshot taken before:\n\n“" + (snap.note || "") +
+            "”\n(" + new Date(snap.at).toLocaleString() + ")\n\nThis replaces the current program, logs, weigh-ins and food.")) {
+            App.store.importJSON(JSON.stringify(snap.state));
+            App.util.toast("Restored");
+            App.util.closeModal(); switchTab(activeTab);
+          }
+        } }));
+    }
+
     body.appendChild(el("div", { class: "row wrap" }, [
+      el("button", { class: "mini", text: "Re-link workout logs", onclick: function () {
+        var n = App.store.relinkLogs();
+        App.store.save();
+        App.util.toast(n ? "Re-linked " + n + " log group(s)" : "Nothing to re-link");
+        App.util.closeModal(); switchTab(activeTab);
+      } }),
       el("button", { class: "mini", text: "Export JSON", onclick: function () {
         navigator.clipboard && navigator.clipboard.writeText(App.store.exportJSON());
         App.util.toast("Copied store JSON to clipboard");

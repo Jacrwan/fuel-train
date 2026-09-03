@@ -11,6 +11,17 @@ window.App = window.App || {};
   function slug(s) {
     return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || ("ex-" + Date.now());
   }
+  function looseKey(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); }
+  /* keep exercise ids stable across edits: if an exercise with this name already
+     exists anywhere in the program (loose match), reuse its id so workout logs
+     stay linked. Otherwise make a fresh slug. */
+  function idForName(name) {
+    var lk = looseKey(name), p = App.store.state.program, hit = null;
+    Object.keys(p).forEach(function (wd) { (p[wd] || []).forEach(function (e) {
+      if (looseKey(e.name) === lk) hit = e.id;
+    }); });
+    return hit || slug(name);
+  }
   function today() { return App.util.todayISO(); }
   function fireChange() { if (typeof App.tools.onChange === "function") { try { App.tools.onChange(); } catch (e) {} } }
   function save() { App.store.save(); fireChange(); }
@@ -173,7 +184,7 @@ window.App = window.App || {};
 
         case "add_exercise": {
           if (!s.program[input.day]) return { ok: false, error: "bad day" };
-          var ex = { id: slug(input.name), name: input.name,
+          var ex = { id: idForName(input.name), name: input.name,
             targetSets: input.sets != null ? num(input.sets) : 3, targetReps: input.reps || "8-10" };
           var arr = s.program[input.day];
           if (input.position != null && input.position >= 0 && input.position < arr.length) arr.splice(input.position, 0, ex);
@@ -215,7 +226,7 @@ window.App = window.App || {};
         case "set_program_day": {
           if (!(input.day in s.program)) return { ok: false, error: "bad day" };
           s.program[input.day] = (input.exercises || []).map(function (x) {
-            return { id: slug(x.name), name: x.name, targetSets: x.sets != null ? num(x.sets) : 3, targetReps: x.reps || "8-10" };
+            return { id: idForName(x.name), name: x.name, targetSets: x.sets != null ? num(x.sets) : 3, targetReps: x.reps || "8-10" };
           });
           save();
           return { ok: true, day: input.day, exercises: s.program[input.day] };
