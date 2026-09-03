@@ -46,8 +46,11 @@ window.App = window.App || {};
       var halls = App.menu.halls(data);
       if (!sel.hall || halls.indexOf(sel.hall) < 0) sel.hall = halls[0];
 
-      body.appendChild(el("div", { class: "muted small", style: "margin-bottom:6px",
-        text: "Menu for " + (data.date || "today") + " · source: " + (data.source || "?") }));
+      var dateLbl = data.date === App.util.todayISO() ? "Today" : (data.date || "");
+      body.appendChild(el("div", { class: "muted small", style: "margin-bottom:8px" }, [
+        document.createTextNode(dateLbl + "'s menu · " + (data.date ? App.util.prettyDate(data.date) : "")),
+        data.source === "heuristic" ? el("span", { class: "faint", text: "  (fallback parse)" }) : null
+      ]));
 
       // hall pills
       var hallRow = el("div", { class: "pill-row", style: "margin-bottom:8px" });
@@ -149,33 +152,41 @@ window.App = window.App || {};
 
   function renderPlan(plan, out, fromCache) {
     out.innerHTML = "";
-    if (fromCache) out.appendChild(el("div", { class: "muted small", text: "Showing last saved plan for this selection." }));
 
-    var wrap = el("div", { class: "card", style: "background:var(--surface-2)" });
-    wrap.appendChild(el("h3", { text: (plan.meals || []).join(" + ") + " @ " + (plan.hall || "") }));
+    var wrap = el("div", { class: "plan" });
+    wrap.appendChild(el("h3", { text:
+      (plan.meals || []).map(cap).join(" + ") + " · " + (plan.hall || "") +
+      (fromCache ? "  (saved)" : "") }));
 
     (plan.items || []).forEach(function (it) {
       var isUsda = (it.source || "").toLowerCase().indexOf("usda") === 0;
+      var meta = [];
+      if (it.portion) meta.push(it.portion);
+      if (it.grams) meta.push(it.grams + " g");
+      var macroStr = Math.round(it.calories) + " kcal  ·  P " + r1(it.protein) + "  C " + r1(it.carbs) + "  F " + r1(it.fat);
+
       wrap.appendChild(el("div", { class: "plan-item" }, [
-        el("div", { class: "pi-top" }, [
-          el("span", { class: "pi-name" }, [
-            document.createTextNode(it.dish + " "),
-            el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." })
-          ]),
-          el("span", { class: "pi-portion", text: (it.portion || "") + (it.grams ? " · " + it.grams + " g" : "") })
+        el("div", { class: "pi-name" }, [
+          document.createTextNode(it.dish),
+          el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." })
         ]),
-        el("div", { class: "pi-macros", text:
-          Math.round(it.calories) + " kcal · P " + r1(it.protein) + " · C " + r1(it.carbs) + " · F " + r1(it.fat) +
-          (it.note ? "  — " + it.note : "") })
+        el("div", { class: "pi-meta" }, [
+          meta.length ? el("span", { text: meta.join(" · ") }) : null,
+          meta.length ? el("span", { class: "dot", text: "·" }) : null,
+          el("span", { text: macroStr })
+        ]),
+        it.note ? el("div", { class: "pi-note", text: it.note }) : null
       ]));
     });
 
     var targets = scaledTargets(plan.meals || []);
     var tot = plan.totals || sumItems(plan.items);
     wrap.appendChild(totalsGrid(tot, targets));
-    if (plan.notes) wrap.appendChild(el("p", { class: "muted small", style: "margin-top:10px", text: plan.notes }));
+    if (plan.notes) wrap.appendChild(el("p", { class: "muted small", style: "margin-top:12px", text: plan.notes }));
     out.appendChild(wrap);
   }
+
+  function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
 
   function sumItems(items) {
     return (items || []).reduce(function (a, it) {
@@ -185,20 +196,23 @@ window.App = window.App || {};
   }
 
   function totalsGrid(tot, target) {
-    function cell(label, val, tgt, unit) {
+    function cell(label, val, tgt) {
       var d = Math.round(val - tgt);
       var cls = Math.abs(d) <= Math.max(3, tgt * 0.08) ? "ok" : (d > 0 ? "over" : "under");
       return el("div", { class: "t" }, [
-        el("div", { class: "v", text: Math.round(val) + (unit || "") }),
-        el("div", { class: "l", text: label }),
-        el("div", { class: "d " + cls, text: (d >= 0 ? "+" : "") + d + " vs " + tgt })
+        el("div", { class: "v", text: Math.round(val) }),
+        el("div", { class: "l", text: label + " / " + tgt }),
+        el("div", { class: "d " + cls, text: (d >= 0 ? "+" : "−") + Math.abs(d) })
       ]);
     }
-    return el("div", { class: "totals" }, [
-      cell("kcal", tot.calories, target.calories, ""),
-      cell("protein", tot.protein, target.protein, "g"),
-      cell("carbs", tot.carbs, target.carbs, "g"),
-      cell("fat", tot.fat, target.fat, "g")
+    return el("div", {}, [
+      el("div", { class: "subhead", style: "margin-bottom:6px", text: "Totals vs. target for this selection" }),
+      el("div", { class: "totals" }, [
+        cell("kcal", tot.calories, target.calories),
+        cell("protein", tot.protein, target.protein),
+        cell("carbs", tot.carbs, target.carbs),
+        cell("fat", tot.fat, target.fat)
+      ])
     ]);
   }
 

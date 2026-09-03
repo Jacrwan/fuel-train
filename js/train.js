@@ -79,13 +79,27 @@ window.App = window.App || {};
     return wrap;
   }
 
+  function setbar(count, target) {
+    var wrap = el("span", { class: "setbar", "aria-label": count + " of " + target + " sets" });
+    var n = Math.max(target, count);
+    for (var i = 0; i < n; i++) {
+      wrap.appendChild(el("i", { class: i < target ? (i < count ? "on" : "") : "extra" }));
+    }
+    return wrap;
+  }
+
   function exerciseBlock(ex, idx, dateISO, container) {
     var sets = setsFor(dateISO, ex.id);
-    var block = el("div", { class: "ex" });
+    var done = sets.length >= ex.targetSets;
+    var block = el("div", { class: "ex" + (done ? " done" : "") });
 
     var head = el("div", { class: "ex-head" }, [
-      el("span", { class: "ex-name", text: ex.name, onclick: function () { showHistory(ex, dateISO); } }),
-      el("span", { class: "ex-target", text: ex.targetSets + " × " + ex.targetReps })
+      el("span", { class: "ex-name grow", text: ex.name, role: "button", tabindex: "0",
+        onclick: function () { showHistory(ex, dateISO); } }),
+      el("span", { class: "ex-headmeta" }, [
+        el("span", { class: "ex-target", text: ex.targetSets + " × " + ex.targetReps }),
+        setbar(sets.length, ex.targetSets)
+      ])
     ]);
     block.appendChild(head);
 
@@ -129,17 +143,16 @@ window.App = window.App || {};
     rIn.addEventListener("keydown", function (e) { if (e.key === "Enter") addSet(); });
 
     var entry = el("div", { class: "ex-entry" }, [
-      el("label", { class: "field" }, ["Weight", wIn]),
+      el("label", { class: "field" }, ["Weight (lb)", wIn]),
       el("label", { class: "field" }, ["Reps", rIn]),
-      el("button", { class: "mini", text: "Add set", onclick: addSet }),
-      el("span", { class: "tally", text: sets.length + "/" + ex.targetSets })
+      el("button", { class: "mini", text: "Add set", onclick: addSet })
     ]);
     block.appendChild(entry);
 
     if (editMode) {
-      block.appendChild(el("div", { class: "row", style: "padding:8px 12px;gap:6px" }, [
-        el("button", { class: "mini", text: "▲", onclick: function () { move(ex, idx, -1, container); } }),
-        el("button", { class: "mini", text: "▼", onclick: function () { move(ex, idx, 1, container); } }),
+      block.appendChild(el("div", { class: "ex-editrow" }, [
+        el("button", { class: "mini icon", text: "▲", onclick: function () { move(ex, idx, -1, container); } }),
+        el("button", { class: "mini icon", text: "▼", onclick: function () { move(ex, idx, 1, container); } }),
         el("button", { class: "mini", text: "Edit", onclick: function () { editExercise(ex, container); } }),
         el("span", { class: "grow" }),
         el("button", { class: "mini", text: "Delete", onclick: function () {
@@ -254,7 +267,9 @@ window.App = window.App || {};
   // ------------------------------------------------------------- AI actions
   function aiCard(container) {
     var card = el("div", { class: "card" });
-    card.appendChild(el("h3", { text: "Coach (AI)" }));
+    card.appendChild(el("h3", { text: "Program (AI)" }));
+    card.appendChild(el("p", { class: "muted small", style: "margin:0 0 10px",
+      text: "Uses your recent logs + goal to propose an updated week. You review a diff before anything changes." }));
     var status = el("div", { class: "progress-note" });
 
     var genBtn = el("button", { class: "btn secondary", text: "Generate / update program", onclick: function () {
@@ -267,18 +282,7 @@ window.App = window.App || {};
         .then(function () { genBtn.disabled = false; });
     } });
 
-    var anaBtn = el("button", { class: "btn ghost", style: "margin-top:8px", text: "Analyze progress", onclick: function () {
-      if (!App.ai.hasKey()) { util.toast("Add your Anthropic API key in Settings"); return; }
-      anaBtn.disabled = true; status.innerHTML = "<span class='spinner'></span>Reviewing your logs…";
-      App.ai.analyzeProgress().then(function (text) {
-        status.textContent = "";
-        util.openModal("Progress analysis", el("div", { style: "white-space:pre-wrap;font-size:14px", text: text }));
-      }).catch(function (e) { status.innerHTML = ""; card.appendChild(el("div", { class: "err", text: String(e.message || e) })); })
-        .then(function () { anaBtn.disabled = false; });
-    } });
-
     card.appendChild(genBtn);
-    card.appendChild(anaBtn);
     card.appendChild(status);
     return card;
   }

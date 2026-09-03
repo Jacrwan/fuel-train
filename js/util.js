@@ -71,23 +71,26 @@ window.App = window.App || {};
     toastTimer = setTimeout(function () { t.remove(); }, 3200);
   }
 
+  function onKey(e) { if (e.key === "Escape") closeModal(); }
   function openModal(title, bodyNode) {
     closeModal();
     var backdrop = el("div", { class: "modal-backdrop", onclick: function (e) {
       if (e.target === backdrop) closeModal();
     } });
-    var modal = el("div", { class: "modal" }, [
-      el("button", { class: "mini close-x", text: "Close", onclick: closeModal }),
+    var modal = el("div", { class: "modal", role: "dialog", "aria-modal": "true", "aria-label": title }, [
+      el("button", { class: "mini icon close-x", text: "✕", "aria-label": "Close", onclick: closeModal }),
       el("h2", { text: title }),
       bodyNode
     ]);
     backdrop.appendChild(modal);
     document.getElementById("modal-root").appendChild(backdrop);
+    document.addEventListener("keydown", onKey);
     return { close: closeModal, modal: modal };
   }
   function closeModal() {
     var r = document.getElementById("modal-root");
     if (r) r.innerHTML = "";
+    document.removeEventListener("keydown", onKey);
   }
 
   function round(n, dp) {

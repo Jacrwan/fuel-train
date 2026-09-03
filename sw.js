@@ -1,5 +1,5 @@
 /* Minimal service worker: precache the app shell, network-first for menu.json. */
-var CACHE = "fueltrain-shell-v1";
+var CACHE = "fueltrain-shell-v2";
 var SHELL = [
   ".",
   "index.html",
@@ -11,6 +11,7 @@ var SHELL = [
   "js/ai.js",
   "js/fuel.js",
   "js/train.js",
+  "js/progress.js",
   "js/app.js",
   "manifest.json",
   "icons/icon-192.png",

@@ -17,15 +17,17 @@
     registerSW();
   });
 
+  var TITLES = { fuel: "Fuel", train: "Train", progress: "Progress" };
   function switchTab(tab) {
     activeTab = tab;
     document.querySelectorAll(".tab").forEach(function (b) {
       b.setAttribute("aria-selected", String(b.dataset.tab === tab));
     });
-    document.getElementById("topbar-title").textContent = tab === "fuel" ? "Fuel" : "Train";
+    document.getElementById("topbar-title").textContent = TITLES[tab] || "Fuel";
     var view = document.getElementById("view");
     view.scrollTop = 0;
-    (tab === "fuel" ? App.fuel : App.train).render(view);
+    window.scrollTo(0, 0);
+    ({ fuel: App.fuel, train: App.train, progress: App.progress })[tab].render(view);
   }
 
   // ---------------------------------------------------------------- settings
