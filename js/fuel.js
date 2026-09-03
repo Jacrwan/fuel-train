@@ -152,50 +152,120 @@ window.App = window.App || {};
 
   function renderPlan(plan, out, fromCache) {
     out.innerHTML = "";
+    if (!plan.extras) plan.extras = [];
+    var rerender = function () { App.store.save(); renderPlan(plan, out, fromCache); };
+
+    var eatenCount = (plan.items || []).filter(function (i) { return i.eaten; }).length +
+      plan.extras.filter(function (e) { return e.eaten; }).length;
+    var totalCount = (plan.items || []).length + plan.extras.length;
 
     var wrap = el("div", { class: "plan" });
-    wrap.appendChild(el("h3", { text:
-      (plan.meals || []).map(cap).join(" + ") + " · " + (plan.hall || "") +
-      (fromCache ? "  (saved)" : "") }));
+    wrap.appendChild(el("div", { class: "row spread", style: "margin-bottom:10px" }, [
+      el("h3", { style: "margin:0", text: (plan.meals || []).map(cap).join(" + ") + " · " + (plan.hall || "") }),
+      el("span", { class: "faint small", text: eatenCount + " / " + totalCount + " eaten" })
+    ]));
 
     (plan.items || []).forEach(function (it) {
-      var isUsda = (it.source || "").toLowerCase().indexOf("usda") === 0;
-      var meta = [];
-      if (it.portion) meta.push(it.portion);
-      if (it.grams) meta.push(it.grams + " g");
-      var macroStr = Math.round(it.calories) + " kcal  ·  P " + r1(it.protein) + "  C " + r1(it.carbs) + "  F " + r1(it.fat);
-
-      wrap.appendChild(el("div", { class: "plan-item" }, [
-        el("div", { class: "pi-name" }, [
-          document.createTextNode(it.dish),
-          el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." })
-        ]),
-        el("div", { class: "pi-meta" }, [
-          meta.length ? el("span", { text: meta.join(" · ") }) : null,
-          meta.length ? el("span", { class: "dot", text: "·" }) : null,
-          el("span", { text: macroStr })
-        ]),
-        it.note ? el("div", { class: "pi-note", text: it.note }) : null
-      ]));
+      wrap.appendChild(planItemRow(it, false, rerender));
     });
 
+    // --- ate something else ---
+    wrap.appendChild(el("div", { class: "subhead", style: "margin-top:14px", text: "Ate something else" }));
+    if (!plan.extras.length) {
+      wrap.appendChild(el("p", { class: "faint small", style: "margin:0 0 8px",
+        text: "Add anything you ate that wasn't suggested. Macros optional — filled ones count toward your eaten totals." }));
+    }
+    plan.extras.forEach(function (ex, i) {
+      wrap.appendChild(planItemRow(ex, true, rerender, function () {
+        plan.extras.splice(i, 1); rerender();
+      }));
+    });
+    wrap.appendChild(extraForm(plan, rerender));
+
+    // --- totals ---
     var targets = scaledTargets(plan.meals || []);
-    var tot = plan.totals || sumItems(plan.items);
-    wrap.appendChild(totalsGrid(tot, targets));
+    var planned = plan.totals || sumMacros(plan.items);
+    var eaten = sumEaten(plan);
+    wrap.appendChild(totalsSection(eaten, planned, targets));
+
     if (plan.notes) wrap.appendChild(el("p", { class: "muted small", style: "margin-top:12px", text: plan.notes }));
     out.appendChild(wrap);
   }
 
+  function planItemRow(it, isExtra, rerender, onRemove) {
+    var name = it.dish || it.name || "";
+    var hasMacros = [it.calories, it.protein, it.carbs, it.fat].some(function (v) { return +v > 0; });
+    var isUsda = !isExtra && (it.source || "").toLowerCase().indexOf("usda") === 0;
+
+    var cb = el("input", { type: "checkbox" });
+    cb.checked = !!it.eaten;
+    cb.addEventListener("change", function () { it.eaten = cb.checked; rerender(); });
+
+    var meta = [];
+    if (it.portion) meta.push(it.portion);
+    if (it.grams) meta.push(it.grams + " g");
+    var macroStr = hasMacros
+      ? Math.round(it.calories || 0) + " kcal  ·  P " + r1(it.protein) + "  C " + r1(it.carbs) + "  F " + r1(it.fat)
+      : (isExtra ? "no macros entered" : "");
+
+    var nameChildren = [document.createTextNode(name)];
+    if (!isExtra) nameChildren.push(el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." }));
+    if (isExtra && onRemove) nameChildren.push(el("button", { class: "linkx", text: "remove",
+      onclick: function (e) { e.preventDefault(); e.stopPropagation(); onRemove(); } }));
+
+    var body = el("div", { class: "grow", onclick: function (e) {
+      if (e.target.closest("button")) return;
+      cb.click();
+    } }, [
+      el("div", { class: "pi-name" }, nameChildren),
+      (meta.length || macroStr) ? el("div", { class: "pi-meta" }, [
+        meta.length ? el("span", { text: meta.join(" · ") }) : null,
+        (meta.length && macroStr) ? el("span", { class: "dot", text: "·" }) : null,
+        macroStr ? el("span", { text: macroStr }) : null
+      ]) : null,
+      it.note ? el("div", { class: "pi-note", text: it.note }) : null
+    ]);
+
+    return el("div", { class: "plan-item eatable" + (it.eaten ? " on" : "") }, [cb, body]);
+  }
+
+  function extraForm(plan, rerender) {
+    var name = el("input", { placeholder: "e.g. Clif bar, cold brew…" });
+    function mini(ph) { return el("input", { type: "number", inputmode: "decimal", placeholder: ph }); }
+    var kcal = mini("kcal"), p = mini("P"), c = mini("C"), f = mini("F");
+    function add() {
+      if (!name.value.trim()) { name.focus(); return; }
+      plan.extras.push({
+        name: name.value.trim(),
+        calories: App.util.num(kcal.value, 0), protein: App.util.num(p.value, 0),
+        carbs: App.util.num(c.value, 0), fat: App.util.num(f.value, 0),
+        eaten: true
+      });
+      rerender();
+    }
+    name.addEventListener("keydown", function (e) { if (e.key === "Enter") add(); });
+    return el("div", { class: "extra-form" }, [
+      name,
+      el("div", { class: "row", style: "gap:6px;margin-top:6px" }, [kcal, p, c, f]),
+      el("button", { class: "mini", style: "margin-top:6px;width:100%;height:38px", text: "Add food", onclick: add })
+    ]);
+  }
+
   function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
 
-  function sumItems(items) {
+  function sumMacros(items) {
     return (items || []).reduce(function (a, it) {
       a.calories += +it.calories || 0; a.protein += +it.protein || 0;
       a.carbs += +it.carbs || 0; a.fat += +it.fat || 0; return a;
     }, { calories: 0, protein: 0, carbs: 0, fat: 0 });
   }
+  function sumEaten(plan) {
+    var eatenItems = (plan.items || []).filter(function (i) { return i.eaten; })
+      .concat(plan.extras.filter(function (e) { return e.eaten; }));
+    return sumMacros(eatenItems);
+  }
 
-  function totalsGrid(tot, target) {
+  function totalsSection(eaten, planned, target) {
     function cell(label, val, tgt) {
       var d = Math.round(val - tgt);
       var cls = Math.abs(d) <= Math.max(3, tgt * 0.08) ? "ok" : (d > 0 ? "over" : "under");
@@ -205,14 +275,17 @@ window.App = window.App || {};
         el("div", { class: "d " + cls, text: (d >= 0 ? "+" : "−") + Math.abs(d) })
       ]);
     }
-    return el("div", {}, [
-      el("div", { class: "subhead", style: "margin-bottom:6px", text: "Totals vs. target for this selection" }),
+    return el("div", { style: "margin-top:14px" }, [
+      el("div", { class: "subhead", style: "margin-bottom:6px", text: "Eaten vs. target (this selection)" }),
       el("div", { class: "totals" }, [
-        cell("kcal", tot.calories, target.calories),
-        cell("protein", tot.protein, target.protein),
-        cell("carbs", tot.carbs, target.carbs),
-        cell("fat", tot.fat, target.fat)
-      ])
+        cell("kcal", eaten.calories, target.calories),
+        cell("protein", eaten.protein, target.protein),
+        cell("carbs", eaten.carbs, target.carbs),
+        cell("fat", eaten.fat, target.fat)
+      ]),
+      el("p", { class: "faint small", style: "margin:8px 0 0", text:
+        "Full plan if you ate everything: " + Math.round(planned.calories) + " kcal · P " +
+        r1(planned.protein) + " C " + r1(planned.carbs) + " F " + r1(planned.fat) })
     ]);
   }
 

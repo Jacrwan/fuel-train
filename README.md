@@ -64,8 +64,10 @@ The GitHub Action (`.github/workflows/scrape-menu.yml`) runs at 13:00 and 22:00 
      add your own free key in **Settings**.
   2. The menu + USDA data + your targets go to the Anthropic API
      (`claude-sonnet-4-6`), which returns specific dishes and portions as JSON.
-- Each item is tagged **USDA** (green) or **AI est.** (amber). Totals show the delta
-  vs. target.
+- Each item is tagged **USDA** (green) or **AI est.** (amber).
+- **Check off** items as you actually eat them; an **"Ate something else"** box lets you
+  add unplanned foods (macros optional). Totals show **eaten vs. target**, with the full
+  planned total as a reference. State is saved per hall+meal per day.
 
 ## 3. Train tab
 

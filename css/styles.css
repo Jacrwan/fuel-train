@@ -111,7 +111,10 @@ input, select, textarea {
 textarea { resize: vertical; min-height: 68px; height: auto; padding: var(--s2) var(--s3); line-height: 1.4; }
 input:focus, select:focus, textarea:focus { outline: 2px solid color-mix(in srgb, var(--accent) 60%, transparent); outline-offset: 1px; border-color: var(--accent); }
 input[type="number"] { -moz-appearance: textfield; }
-input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); flex: 0 0 auto; }
+input[type="checkbox"] {
+  appearance: auto; -webkit-appearance: auto;
+  width: 22px; height: 22px; padding: 0; accent-color: var(--accent); flex: 0 0 auto;
+}
 
 button.btn {
   background: var(--accent); color: var(--accent-ink); border: none;
@@ -196,6 +199,14 @@ button.mini.icon { width: 34px; padding: 0; }
 .plan h3 { margin: 0 0 var(--s3); font-size: 13px; font-weight: 650; text-transform: none; letter-spacing: 0; color: var(--text); }
 .plan-item { border-top: 1px solid var(--border); padding: var(--s3) 0; }
 .plan-item:first-of-type { border-top: none; padding-top: 0; }
+.plan-item.eatable { display: flex; gap: var(--s3); align-items: flex-start; }
+.plan-item.eatable input[type="checkbox"] { margin-top: 2px; }
+.plan-item.eatable .grow { cursor: pointer; }
+.plan-item.eatable:not(.on) .pi-name,
+.plan-item.eatable:not(.on) .pi-meta { opacity: .55; }
+.linkx { background: none; border: none; color: var(--text-faint); font: inherit; font-size: 11px; text-decoration: underline; cursor: pointer; padding: 0; }
+.extra-form { margin-top: var(--s2); }
+.extra-form .row input { text-align: center; padding: 0 var(--s1); }
 .pi-name { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .pi-meta { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
 .pi-meta .dot { color: var(--text-faint); margin: 0 5px; }
