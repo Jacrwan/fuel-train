@@ -181,7 +181,8 @@ window.App = window.App || {};
     var system =
       "You are a strength coach reviewing training logs. Give a short, concrete assessment: " +
       "what's progressing, what's stalling, consistency vs. the planned schedule, and one or " +
-      "two specific suggestions. Plain text, ~150-220 words, no preamble.";
+      "two specific suggestions. ~150-220 words, no preamble. Plain text only — no Markdown, " +
+      "no **bold**, no ## headings, no bullet asterisks.";
     var user =
       "ATHLETE: " + statsBlob() + "\n\n" +
       "PROGRAM (JSON):\n" + JSON.stringify(App.store.state.program) + "\n\n" +

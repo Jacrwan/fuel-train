@@ -19,7 +19,9 @@ window.App = window.App || {};
     "you need current context. Make the change the user asks for directly with tools — don't just " +
     "describe it. For large or destructive changes (replacing a whole training day, deleting " +
     "several things), briefly say what you did after doing it. Weights are pounds. Keep replies " +
-    "short and concrete.";
+    "short and concrete.\n\n" +
+    "Write in plain text only. Do not use Markdown — no **bold**, no ##/### headings, no *** " +
+    "rules, no bullet markdown. Short paragraphs; if you list things use plain lines.";
 
   function render(container) {
     boot();
@@ -78,7 +80,9 @@ window.App = window.App || {};
   }
 
   function bubble(who, text) {
-    return el("div", { class: "msg " + who }, [el("div", { class: "bub", text: text })]);
+    return el("div", { class: "msg " + who }, [
+      el("div", { class: "bub", text: who === "assistant" ? App.util.plainText(text) : text })
+    ]);
   }
   function toolChip(name, input, _r) {
     var arg = input && Object.keys(input).length ? "  " + JSON.stringify(input).slice(0, 80) : "";

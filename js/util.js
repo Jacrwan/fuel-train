@@ -103,12 +103,31 @@ window.App = window.App || {};
     return isFinite(n) ? n : (fallback || 0);
   }
 
+  /* Strip common Markdown so AI text renders clean in plain-text bubbles. */
+  function plainText(s) {
+    if (!s) return "";
+    return String(s)
+      .replace(/```[\s\S]*?```/g, function (m) { return m.replace(/```/g, "").trim(); }) // fenced code
+      .replace(/`([^`]+)`/g, "$1")                       // inline code
+      .replace(/^\s{0,3}#{1,6}\s+/gm, "")                // ## headings
+      .replace(/^\s{0,3}[-*_]{3,}\s*$/gm, "")            // --- *** hr
+      .replace(/\*\*\*([^*]+)\*\*\*/g, "$1")             // ***bold italic***
+      .replace(/\*\*([^*]+)\*\*/g, "$1")                 // **bold**
+      .replace(/__([^_]+)__/g, "$1")                     // __bold__
+      // *italic* / _italic_ — only when wrapping plain words (never touch 3*4=12)
+      .replace(/(^|[\s(])[*_]([A-Za-z][A-Za-z '\-]{0,48}[A-Za-z]|[A-Za-z])[*_](?=[\s.,;:!?)]|$)/g, "$1$2")
+      .replace(/^\s{0,3}[-*+]\s+/gm, "• ")               // bullets -> •
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1 ($2)")    // [text](url)
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  }
+
   App.util = {
     WEEKDAYS: WEEKDAYS, WD_SHORT: WD_SHORT, WD_ORDER: WD_ORDER,
     toISO: toISO, todayISO: todayISO, isoToDate: isoToDate,
     weekdayKeyOf: weekdayKeyOf, mostRecentDateForWeekday: mostRecentDateForWeekday,
     prettyDate: prettyDate,
     el: el, toast: toast, openModal: openModal, closeModal: closeModal,
-    round: round, num: num
+    round: round, num: num, plainText: plainText
   };
 })();

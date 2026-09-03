@@ -268,7 +268,7 @@ window.App = window.App || {};
       btn.disabled = true; status.innerHTML = "<span class='spinner'></span>Reviewing your logs…";
       App.ai.analyzeProgress().then(function (text) {
         status.textContent = "";
-        util.openModal("Progress analysis", el("div", { style: "white-space:pre-wrap;font-size:14px;line-height:1.5", text: text }));
+        util.openModal("Progress analysis", el("div", { style: "white-space:pre-wrap;font-size:14px;line-height:1.5", text: App.util.plainText(text) }));
       }).catch(function (e) { status.innerHTML = ""; card.appendChild(el("div", { class: "err", text: String(e.message || e) })); })
         .then(function () { btn.disabled = false; });
     } });
