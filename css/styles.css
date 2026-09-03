@@ -32,17 +32,20 @@ body {
   color: var(--text);
   font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* app-shell: header + scrolling view + tab bar, all in normal flow so the
+     tab bar never drifts with the iOS Safari toolbar */
+  display: flex; flex-direction: column;
+  height: 100vh; height: 100dvh; overflow: hidden;
   padding-top: env(safe-area-inset-top, 0px);
 }
 a { color: var(--accent); }
 
 /* ---------- top bar ---------- */
 .topbar {
-  position: sticky; top: 0; z-index: 20;
+  flex: 0 0 auto; z-index: 20;
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--s3) var(--s4);
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 .topbar h1 { font-size: 19px; margin: 0; font-weight: 660; letter-spacing: -0.01em; }
@@ -54,24 +57,24 @@ a { color: var(--accent); }
 
 /* ---------- layout ---------- */
 .view {
-  padding: var(--s4);
-  padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + var(--s6));
-  max-width: 720px; margin: 0 auto;
+  flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  align-self: center; width: 100%; max-width: 720px;
+  padding: var(--s4) var(--s4) var(--s8);
 }
+.view.view--chat { padding: 0; overflow: hidden; }
 
 .tabbar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-  height: calc(var(--tabbar-h) + var(--safe-b));
+  flex: 0 0 auto; z-index: 20;
   padding-bottom: var(--safe-b);
   display: flex;
-  background: color-mix(in srgb, var(--bg) 94%, transparent);
-  backdrop-filter: blur(10px);
+  background: var(--bg);
   border-top: 1px solid var(--border);
 }
 .tab {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 3px; background: none; border: none; color: var(--text-faint);
   font-size: 11px; font-weight: 550; cursor: pointer; padding: var(--s2) 0;
+  min-height: var(--tabbar-h);
 }
 .tab[aria-selected="true"] { color: var(--accent); }
 .tab-glyph { font-size: 19px; line-height: 1; filter: grayscale(1) opacity(.75); }
@@ -285,4 +288,35 @@ button.mini.icon { width: 34px; padding: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .progress-note { font-size: 12px; color: var(--text-dim); margin-top: var(--s2); min-height: 16px; }
 .err { color: var(--bad); font-size: 13px; white-space: pre-wrap; margin-top: var(--s2); }
-.empty-state { text-align: center; color: var(--text-dim); padding: var(--s6) var(--s4); font-size: 13px; }
+.empty-state { text-align: center; color: var(--text-dim); padding: var(--s6) var(--s4); font-size: 13px; line-height: 1.9; }
+
+/* ---------- eaten-food rows (Fuel intake card) ---------- */
+.food-row { display: flex; gap: var(--s3); align-items: flex-start; padding: 8px 0; border-top: 1px solid var(--border); }
+.food-row:first-child { border-top: none; }
+.fr-name { font-weight: 600; font-size: 14px; }
+
+/* ---------- Coach chat ---------- */
+.chat { display: flex; flex-direction: column; height: 100%; }
+.chat-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: var(--s4); display: flex; flex-direction: column; gap: var(--s2); }
+.msg { display: flex; }
+.msg.user { justify-content: flex-end; }
+.msg .bub {
+  max-width: 84%; padding: 9px 12px; border-radius: 14px; font-size: 14px; line-height: 1.45;
+  white-space: pre-wrap; word-wrap: break-word;
+}
+.msg.user .bub { background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
+.msg.assistant .bub { background: var(--surface-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+.tool-chip {
+  align-self: flex-start; font-size: 11px; font-family: var(--font-mono, ui-monospace, monospace);
+  color: var(--text-dim); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 7px; padding: 4px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.tool-chip.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 35%, var(--border)); }
+.tool-chip.bad { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, var(--border)); }
+.chat-bar {
+  flex: 0 0 auto; display: flex; gap: var(--s2); align-items: flex-end;
+  padding: var(--s3) var(--s4) calc(var(--s3) + var(--safe-b));
+  border-top: 1px solid var(--border); background: var(--bg);
+}
+.chat-input { flex: 1; resize: none; min-height: 42px; max-height: 120px; line-height: 1.4; padding: 10px 12px; height: 42px; }
+.chat-bar .row .mini { height: 38px; }

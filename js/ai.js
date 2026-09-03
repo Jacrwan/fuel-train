@@ -12,15 +12,10 @@ window.App = window.App || {};
     return { key: (s.anthropicKey || "").trim(), model: s.model || "claude-sonnet-4-6" };
   }
 
-  function callClaude(opts) {
+  function rawCall(body) {
     var c = cfg();
     if (!c.key) return Promise.reject(new Error("No Anthropic API key set. Add one in Settings."));
-    var body = {
-      model: c.model,
-      max_tokens: opts.maxTokens || 2000,
-      system: opts.system || "",
-      messages: [{ role: "user", content: opts.user }]
-    };
+    body.model = body.model || c.model;
     return fetch(ENDPOINT, {
       method: "POST",
       headers: {
@@ -36,10 +31,57 @@ window.App = window.App || {};
           var msg = (data && data.error && data.error.message) || ("HTTP " + r.status);
           throw new Error("Anthropic API: " + msg);
         }
-        var text = ((data.content || []).filter(function (b) { return b.type === "text"; })[0] || {}).text || "";
-        return text;
+        return data;
       });
     });
+  }
+
+  function callClaude(opts) {
+    return rawCall({
+      max_tokens: opts.maxTokens || 2000,
+      system: opts.system || "",
+      messages: [{ role: "user", content: opts.user }]
+    }).then(function (data) {
+      return ((data.content || []).filter(function (b) { return b.type === "text"; })[0] || {}).text || "";
+    });
+  }
+
+  /* Agentic tool loop. messages: [{role, content}]. Calls onStep(kind, payload)
+     for UI: kind = "text" | "tool" | "tool_result". Returns final assistant text. */
+  function runToolLoop(opts) {
+    var messages = opts.messages; // caller's live array — mutated in place so history persists
+    var maxTurns = opts.maxTurns || 8;
+
+    function turn(n) {
+      if (n > maxTurns) return Promise.resolve("(stopped after " + maxTurns + " steps)");
+      return rawCall({
+        max_tokens: opts.maxTokens || 2500,
+        system: opts.system || "",
+        tools: opts.tools,
+        messages: messages
+      }).then(function (data) {
+        messages.push({ role: "assistant", content: data.content });
+        var textParts = (data.content || []).filter(function (b) { return b.type === "text" && b.text.trim(); });
+        textParts.forEach(function (b) { if (opts.onStep) opts.onStep("text", b.text); });
+
+        var toolUses = (data.content || []).filter(function (b) { return b.type === "tool_use"; });
+        if (data.stop_reason !== "tool_use" || !toolUses.length) {
+          return textParts.map(function (b) { return b.text; }).join("\n\n");
+        }
+
+        return Promise.all(toolUses.map(function (tu) {
+          if (opts.onStep) opts.onStep("tool", { name: tu.name, input: tu.input });
+          return Promise.resolve(opts.runTool(tu.name, tu.input)).then(function (result) {
+            if (opts.onStep) opts.onStep("tool_result", { name: tu.name, result: result });
+            return { type: "tool_result", tool_use_id: tu.id, content: JSON.stringify(result).slice(0, 6000) };
+          });
+        })).then(function (results) {
+          messages.push({ role: "user", content: results });
+          return turn(n + 1);
+        });
+      });
+    }
+    return turn(1);
   }
 
   /* pull the first balanced {...} or [...] JSON value out of a string */
@@ -164,10 +206,21 @@ window.App = window.App || {};
     return out;
   }
 
+  /* one-shot: parse a free-text "what I ate" description into food items */
+  function parseFoods(text) {
+    var system = "You convert a casual description of food eaten into structured items with " +
+      "realistic macro estimates. Respond with JSON only.";
+    var user = 'The user ate: "' + text + '"\n\nReturn JSON:\n' +
+      '{"items":[{"name":"","calories":0,"protein":0,"carbs":0,"fat":0,"assumptions":""}]}';
+    return callClaude({ system: system, user: user, maxTokens: 1200 }).then(extractJSON);
+  }
+
   App.ai = {
     mealPlan: mealPlan,
     generateProgram: generateProgram,
     analyzeProgress: analyzeProgress,
+    parseFoods: parseFoods,
+    runToolLoop: runToolLoop,
     _extractJSON: extractJSON,
     hasKey: function () { return !!cfg().key; }
   };

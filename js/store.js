@@ -77,8 +77,10 @@ window.App = window.App || {};
       program: defaultProgram(),
       logs: {},          // "YYYY-MM-DD" -> { exerciseId: [ {weight, reps}, ... ] }
       weighins: {},       // "YYYY-MM-DD" -> lb (number)
+      eatenLog: {},       // "YYYY-MM-DD" -> [ {id, name, calories, protein, carbs, fat, source, ref?} ]
       usdaCache: {},      // dishName(lower) -> {per100g:{kcal,protein,carbs,fat}, fdcId, description, matched}
-      fuelPlans: {}       // "YYYY-MM-DD" -> { "hall|meal": planObject }
+      fuelPlans: {},      // "YYYY-MM-DD" -> { "hall|meal": planObject }
+      chat: []            // Coach chat history: [{role, content}]
     };
   }
 

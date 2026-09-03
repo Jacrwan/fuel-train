@@ -64,10 +64,12 @@ The GitHub Action (`.github/workflows/scrape-menu.yml`) runs at 13:00 and 22:00 
      add your own free key in **Settings**.
   2. The menu + USDA data + your targets go to the Anthropic API
      (`claude-sonnet-4-6`), which returns specific dishes and portions as JSON.
-- Each item is tagged **USDA** (green) or **AI est.** (amber).
-- **Check off** items as you actually eat them; an **"Ate something else"** box lets you
-  add unplanned foods (macros optional). Totals show **eaten vs. target**, with the full
-  planned total as a reference. State is saved per hall+meal per day.
+- Each item is tagged **USDA** (green) or **AI est.** (amber). Check items off as you eat
+  them — they flow into **Today's intake**.
+- **Today's intake** card: everything eaten today (from plan check-offs, a manual
+  add-food form, a free-text *"describe what you ate"* box that Claude parses into macros,
+  or the Coach), totalled against the daily macro target. All eaten data lives in one place
+  (`eatenLog[date]`).
 
 ## 3. Train tab
 
@@ -92,8 +94,18 @@ All three use the same request shape (`POST https://api.anthropic.com/v1/message
 - **Generate / update program** — current program + last ~2 weeks of logs + your
   stats/goal → updated weekly program. Shows a **diff preview**; nothing is overwritten
   until you tap *Replace*.
-- **Analyze progress** — last ~5 weeks of logs → a short written assessment.
+- **Analyze progress** — last ~5 weeks of logs → a short written assessment (Progress tab).
 - **Meal plan** — action #2 above.
+
+### Coach (chat, agentic)
+
+The **Coach** tab is a chat where Claude runs a tool loop (`js/tools.js`) with full
+read/write access to the app: `get_state`, `set_macros`, `add/update/remove/reorder_exercise`,
+`set_program_day`, `log_set`, `add_weighin`, `log_food`, `remove_food`,
+`set_meal_selection`, `generate_meal_plan`. "add a hamstring curl to Wednesday", "I ate a
+burrito and a coke", "bump protein to 200", "how's my squat trending" all work. Tool calls
+and results show inline as chips; changes are applied immediately (no diff gate — it's a
+chat), and the visible tab refreshes. History persists in `localStorage`.
 
 > **Key handling:** the USDA and Anthropic keys live only in this browser's
 > `localStorage` and are sent directly to those APIs. This is fine for personal

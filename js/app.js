@@ -13,11 +13,15 @@
     });
     document.getElementById("btn-settings").addEventListener("click", openSettings);
 
+    // when a tool (Coach chat / Fuel AI box) mutates state, refresh the visible
+    // tab — but never Coach itself (it manages its own transcript live)
+    App.tools.onChange = function () { if (activeTab !== "coach") switchTab(activeTab); };
+
     switchTab("fuel");
     registerSW();
   });
 
-  var TITLES = { fuel: "Fuel", train: "Train", progress: "Progress" };
+  var TITLES = { fuel: "Fuel", train: "Train", progress: "Progress", coach: "Coach" };
   function switchTab(tab) {
     activeTab = tab;
     document.querySelectorAll(".tab").forEach(function (b) {
@@ -25,9 +29,10 @@
     });
     document.getElementById("topbar-title").textContent = TITLES[tab] || "Fuel";
     var view = document.getElementById("view");
-    view.scrollTop = 0;
-    window.scrollTo(0, 0);
-    ({ fuel: App.fuel, train: App.train, progress: App.progress })[tab].render(view);
+    view.classList.toggle("view--chat", tab === "coach");
+    var mod = { fuel: App.fuel, train: App.train, progress: App.progress, coach: App.coach }[tab];
+    mod.render(view);
+    if (tab !== "coach") view.scrollTop = 0;
   }
 
   // ---------------------------------------------------------------- settings
