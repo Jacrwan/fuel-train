@@ -67,7 +67,11 @@ TARGET_LOCATIONS: Dict[str, str] = {
     "clark kerr": "Clark Kerr",
     "clark kerr campus": "Clark Kerr",
     "crossroads": "Crossroads",
+    "foothill": "Foothill",
 }
+
+# Output order for menu.json / the app's hall pills.
+OUTPUT_LOCATIONS = ("Café 3", "Clark Kerr", "Crossroads", "Foothill")
 
 MEALS = ("breakfast", "lunch", "dinner")
 
@@ -132,7 +136,7 @@ def _looks_like_dish(text: str) -> bool:
 
 
 def _empty_menu() -> Dict[str, Dict[str, List[str]]]:
-    return {loc: {m: [] for m in MEALS} for loc in ("Café 3", "Clark Kerr", "Crossroads")}
+    return {loc: {m: [] for m in MEALS} for loc in OUTPUT_LOCATIONS}
 
 
 def _dedupe(seq: List[str]) -> List[str]:

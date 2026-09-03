@@ -14,8 +14,8 @@ menu.json                     latest scraped menu (committed by the Action)
 
 ## 1. Menu scraper
 
-Scrapes `https://dining.berkeley.edu/menus/` for **Café 3, Clark Kerr, Crossroads**
-(breakfast / lunch / dinner). The page is server-rendered WordPress + the "cal-dining"
+Scrapes `https://dining.berkeley.edu/menus/` for **Café 3, Clark Kerr, Crossroads,
+Foothill** (breakfast / lunch / dinner). The page is server-rendered WordPress + the "cal-dining"
 plugin, so a plain `requests` + `BeautifulSoup` pass is enough — no headless browser.
 
 - **Primary:** real CSS selectors — `li.location-name > .cafe-title`, `li.preiod-name`
@@ -41,7 +41,8 @@ Output:
   "menu": {
     "Café 3":     { "breakfast": ["Scrambled Eggs", ...], "lunch": [...], "dinner": [...] },
     "Clark Kerr": { ... },
-    "Crossroads": { ... }
+    "Crossroads": { ... },
+    "Foothill":   { ... }
   }
 }
 ```
