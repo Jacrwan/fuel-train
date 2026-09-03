@@ -89,23 +89,77 @@ window.App = window.App || {};
       el("div", { class: "bub", text: who === "assistant" ? App.util.plainText(text) : text })
     ]);
   }
-  function toolChip(name, input, _r) {
-    var arg = input && Object.keys(input).length ? "  " + JSON.stringify(input).slice(0, 80) : "";
-    return el("div", { class: "tool-chip", text: "⚙ " + name + arg });
+  function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
+  function exList(arr) {
+    return (arr || []).map(function (e) {
+      return (e.name || e) + (e.sets != null ? " " + e.sets + "×" + (e.reps || "") : "");
+    }).join(", ");
+  }
+
+  /* human-readable "what the AI is about to do" line */
+  function describeCall(name, i) {
+    i = i || {};
+    switch (name) {
+      case "get_state": return "Reading your program, logs and targets";
+      case "set_macros": {
+        var p = ["calories", "protein", "carbs", "fat"].filter(function (k) { return i[k] != null; })
+          .map(function (k) { return k + " " + i[k]; });
+        return "Set macro targets — " + (p.join(", ") || "?");
+      }
+      case "add_exercise": return "Add “" + i.name + "” to " + cap(i.day) +
+        (i.sets != null ? " (" + i.sets + "×" + (i.reps || "") + ")" : "");
+      case "update_exercise": return "Update “" + i.exercise + "” on " + cap(i.day) +
+        (i.new_name ? " → “" + i.new_name + "”" : "") +
+        (i.sets != null || i.reps != null ? " (" + (i.sets != null ? i.sets + "×" : "") + (i.reps || "") + ")" : "");
+      case "remove_exercise": return "Remove “" + i.exercise + "” from " + cap(i.day);
+      case "reorder_exercise": return "Move “" + i.exercise + "” to slot " + (i.to_index + 1) + " on " + cap(i.day);
+      case "set_program_day": return "Rebuild " + cap(i.day) + ": " + exList(i.exercises);
+      case "log_set": return "Log " + i.exercise + " — " + (i.weight ? i.weight + "×" : "") + i.reps +
+        (i.date ? " (" + i.date + ")" : "");
+      case "add_weighin": return "Log bodyweight " + i.lb + " lb" + (i.date ? " (" + i.date + ")" : "");
+      case "log_food": return "Log food — " + i.name +
+        (i.calories ? " (" + Math.round(i.calories) + " kcal)" : "");
+      case "remove_food": return "Remove food — " + i.food;
+      case "set_meal_selection": return "Plan for " + i.hall + " · " + (i.meals || []).join(" + ");
+      case "generate_meal_plan": return "Generate a dining-hall meal plan";
+      default: return name + " " + JSON.stringify(i);
+    }
+  }
+
+  /* human-readable result line */
+  function describeResult(r) {
+    if (!r) return { ok: true, text: "done" };
+    if (r.error) return { ok: false, text: r.error };
+    if (r.today && r.program) return { ok: true, text: "read app state" };
+    if (r.added) return { ok: true, text: "added " + (r.added.name || "") + (r.day ? " to " + cap(r.day) : "") };
+    if (r.removed) return { ok: true, text: "removed " + r.removed + (r.day ? " from " + cap(r.day) : "") };
+    if (r.exercises && r.day) return { ok: true, text: cap(r.day) + " set — " + exList(r.exercises) };
+    if (r.exercise && r.exercise.name) return { ok: true, text: "updated " + r.exercise.name +
+      " (" + r.exercise.targetSets + "×" + r.exercise.targetReps + ")" };
+    if (r.order) return { ok: true, text: cap(r.day) + " order: " + r.order.join(", ") };
+    if (r.logged) return { ok: true, text: "logged " + r.logged.name };
+    if (r.lb != null) return { ok: true, text: "bodyweight " + r.lb + " lb saved" };
+    if (r.macro_targets) return { ok: true, text: "targets now " + r.macro_targets.calories + " kcal / " +
+      r.macro_targets.protein + "P / " + r.macro_targets.carbs + "C / " + r.macro_targets.fat + "F" };
+    if (r.plan) return { ok: true, text: "meal plan ready (" + ((r.plan.items || []).length) + " items)" };
+    if (r.hall) return { ok: true, text: "plan set to " + r.hall + " · " + (r.meals || []).join(" + ") };
+    if (r.sets_today != null) return { ok: true, text: (r.exercise || "set") + " — " + r.sets_today + " set(s) today" };
+    if (r.ok === false) return { ok: false, text: "failed" };
+    return { ok: true, text: "done" };
+  }
+
+  function chipWithDetail(cls, label, detailObj) {
+    var pre = el("pre", { class: "tool-detail", hidden: "hidden", text: JSON.stringify(detailObj, null, 2) });
+    var chip = el("div", { class: "tool-chip " + cls, text: label, onclick: function () { pre.hidden = !pre.hidden; } });
+    return el("div", {}, [chip, pre]);
+  }
+
+  function toolChip(name, input) {
+    return chipWithDetail("act", "⚙ " + describeCall(name, input), { tool: name, input: input });
   }
   function toolResultChip(r) {
-    var ok = r && (r.ok !== false);
-    var txt;
-    if (!r) txt = "done";
-    else if (r.error) txt = "error: " + r.error;
-    else if (r.added) txt = "added " + (r.added.name || "") + (r.day ? " → " + r.day : "");
-    else if (r.removed) txt = "removed " + r.removed;
-    else if (r.logged) txt = "logged " + r.logged.name;
-    else if (r.macro_targets) txt = "targets: " + r.macro_targets.calories + " kcal / " + r.macro_targets.protein + "P";
-    else if (r.exercise && r.exercise.name) txt = "updated " + r.exercise.name;
-    else if (r.plan) txt = "meal plan ready";
-    else txt = "ok";
-    return el("div", { class: "tool-chip " + (ok ? "ok" : "bad"), text: (ok ? "✓ " : "✗ ") + txt });
+    var d = describeResult(r);
+    return chipWithDetail(d.ok ? "ok" : "bad", (d.ok ? "✓ " : "✗ ") + d.text, r);
   }
 
   function send(text, container) {

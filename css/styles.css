@@ -307,12 +307,19 @@ button.mini.icon { width: 34px; padding: 0; }
 .msg.user .bub { background: var(--accent); color: var(--accent-ink); border-bottom-right-radius: 4px; }
 .msg.assistant .bub { background: var(--surface-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
 .tool-chip {
-  align-self: flex-start; font-size: 11px; font-family: var(--font-mono, ui-monospace, monospace);
-  color: var(--text-dim); background: var(--surface); border: 1px solid var(--border);
-  border-radius: 7px; padding: 4px 8px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  align-self: flex-start; font-size: 12.5px; line-height: 1.4;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--border-strong);
+  border-left-width: 3px; border-radius: 8px; padding: 7px 10px; max-width: 100%;
+  white-space: normal; word-break: break-word; cursor: pointer;
 }
-.tool-chip.ok { color: var(--good); border-color: color-mix(in srgb, var(--good) 35%, var(--border)); }
-.tool-chip.bad { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 40%, var(--border)); }
+.tool-chip.act { border-left-color: var(--accent); }
+.tool-chip.ok  { border-left-color: var(--good); }
+.tool-chip.bad { border-left-color: var(--bad); color: color-mix(in srgb, var(--bad) 85%, #fff); }
+.tool-detail {
+  margin: 4px 0 2px; font-size: 11px; line-height: 1.4; color: var(--text-dim);
+  background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; overflow-x: auto; white-space: pre; max-height: 220px; overflow-y: auto;
+}
 .chat-bar {
   flex: 0 0 auto; display: flex; gap: var(--s2); align-items: flex-end;
   padding: var(--s3) var(--s4) calc(var(--s3) + var(--safe-b));
