@@ -127,7 +127,10 @@ window.App = window.App || {};
       "You are a sports-nutrition assistant helping a lean-bulk-averse athlete on an " +
       "aggressive cut plan meals from a fixed university dining-hall menu. Be realistic " +
       "about dining-hall portions. Prefer high-protein, high-volume, lower-calorie picks. " +
-      "Only choose dishes from the provided list. Respond with JSON only, no prose.";
+      "CRITICAL: every \"dish\" you output must be copied VERBATIM from the AVAILABLE DISHES " +
+      "list — exact same spelling. Never invent, rename, translate, or merge dishes. If no " +
+      "listed dish fills a macro gap, leave the gap rather than adding one that isn't listed. " +
+      "Respond with JSON only, no prose.";
 
     var user =
       "ATHLETE: " + (input.stats || "") + "\n\n" +

@@ -5,8 +5,17 @@ window.App = window.App || {};
   "use strict";
   var el, util;
   var sel = { hall: null, meals: ["lunch"] };
+  var selLoaded = false;
 
-  function boot() { el = App.util.el; util = App.util; }
+  function boot() {
+    el = App.util.el; util = App.util;
+    if (!selLoaded) {
+      var saved = App.store.state.settings.fuelSel;
+      if (saved && saved.hall) { sel.hall = saved.hall; sel.meals = (saved.meals && saved.meals.length) ? saved.meals.slice() : ["lunch"]; }
+      selLoaded = true;
+    }
+  }
+  function saveSel() { App.store.state.settings.fuelSel = { hall: sel.hall, meals: sel.meals.slice() }; App.store.save(); }
   function today() { return App.util.todayISO(); }
   function planKey() { return sel.hall + "|" + sel.meals.slice().sort().join(","); }
 
@@ -145,23 +154,37 @@ window.App = window.App || {};
         data.source === "heuristic" ? el("span", { class: "faint", text: "  (fallback parse)" }) : null
       ]));
 
+      if (data.date !== today()) {
+        body.appendChild(el("div", { class: "err", style: "margin-bottom:8px", text:
+          "⚠ This menu is dated " + data.date + ", not today. If you're online, fully close and reopen the app to refresh it." }));
+      }
+
       var hallRow = el("div", { class: "pill-row", style: "margin-bottom:8px" });
       halls.forEach(function (h) {
         hallRow.appendChild(el("button", { class: "pill", "aria-pressed": String(sel.hall === h),
-          text: h, onclick: function () { sel.hall = h; rerender(); } }));
+          text: h, onclick: function () { sel.hall = h; saveSel(); rerender(); } }));
       });
       body.appendChild(hallRow);
 
-      var mealRow = el("div", { class: "pill-row", style: "margin-bottom:10px" });
+      var mealRow = el("div", { class: "pill-row", style: "margin-bottom:8px" });
       ["breakfast", "lunch", "dinner"].forEach(function (mk) {
         mealRow.appendChild(el("button", { class: "pill", "aria-pressed": String(sel.meals.indexOf(mk) >= 0),
           text: cap(mk), onclick: function () {
             var i = sel.meals.indexOf(mk);
             if (i >= 0) sel.meals.splice(i, 1); else sel.meals.push(mk);
-            rerender();
+            saveSel(); rerender();
           } }));
       });
       body.appendChild(mealRow);
+
+      // let the user eyeball the actual scraped dishes for this selection
+      var curDishes = App.menu.dishesFor(data, sel.hall, sel.meals);
+      var dishList = el("div", { class: "dish-peek", hidden: "hidden", text: curDishes.join(" · ") });
+      body.appendChild(el("button", { class: "linkx", style: "margin-bottom:10px",
+        text: curDishes.length + " dishes on " + (sel.hall || "?") + " " + sel.meals.map(cap).join("/") + " — show",
+        onclick: function (e) { dishList.hidden = !dishList.hidden; e.target.textContent =
+          curDishes.length + " dishes on " + (sel.hall || "?") + " " + sel.meals.map(cap).join("/") + (dishList.hidden ? " — show" : " — hide"); } }));
+      body.appendChild(dishList);
 
       var status = el("div", { class: "progress-note" });
       var out = el("div", {});
@@ -205,6 +228,17 @@ window.App = window.App || {};
         dishes: dishes.map(function (d) { return { name: d, usda: usdaMap[d] }; })
       });
     }).then(function (plan) {
+      // guard against the model inventing dishes not on the scraped menu
+      var have = {};
+      dishes.forEach(function (d) { have[looseName(d)] = d; });
+      (plan.items || []).forEach(function (it) {
+        var match = have[looseName(it.dish)];
+        if (match) { it.dish = match; it.offMenu = false; }
+        else { it.offMenu = true; }
+      });
+      plan.offMenuCount = (plan.items || []).filter(function (it) { return it.offMenu; }).length;
+      plan.dishCount = dishes.length;
+
       var d = data.date || today();
       if (!App.store.state.fuelPlans[d]) App.store.state.fuelPlans[d] = {};
       App.store.state.fuelPlans[d][hall + "|" + meals.slice().sort().join(",")] = plan;
@@ -212,6 +246,8 @@ window.App = window.App || {};
       return plan;
     });
   }
+
+  function looseName(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); }
 
   function scaledTargets(meals) {
     var w = { breakfast: 0.25, lunch: 0.375, dinner: 0.375 };
@@ -238,6 +274,11 @@ window.App = window.App || {};
       el("h3", { style: "margin:0", text: (plan.meals || []).map(cap).join(" + ") + " · " + (plan.hall || "") }),
       el("span", { class: "faint small", text: eatenN + " / " + (plan.items || []).length + " eaten" })
     ]));
+    if (plan.offMenuCount) {
+      wrap.appendChild(el("div", { class: "err small", style: "margin-bottom:8px", text:
+        plan.offMenuCount + (plan.offMenuCount === 1 ? " item isn't" : " items aren't") +
+        " on today's " + (plan.hall || "") + " menu (AI slip) — ignore it and regenerate." }));
+    }
 
     (plan.items || []).forEach(function (it) {
       var ref = key + "::" + it.dish;
@@ -260,15 +301,17 @@ window.App = window.App || {};
       if (it.portion) meta.push(it.portion);
       if (it.grams) meta.push(it.grams + " g");
       meta.push(Math.round(it.calories || 0) + " kcal · P " + r1(it.protein) + " C " + r1(it.carbs) + " F " + r1(it.fat));
+      var nameKids = [
+        document.createTextNode(it.dish),
+        el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." })
+      ];
+      if (it.offMenu) nameKids.push(el("span", { class: "badge off", text: "not on menu" }));
       var bodyDiv = el("div", { class: "grow", onclick: function (e) { if (!e.target.closest("button")) cb.click(); } }, [
-        el("div", { class: "pi-name" }, [
-          document.createTextNode(it.dish),
-          el("span", { class: "badge " + (isUsda ? "usda" : "ai"), text: isUsda ? "USDA" : "AI est." })
-        ]),
+        el("div", { class: "pi-name" }, nameKids),
         el("div", { class: "pi-meta", text: meta.join("  ·  ") }),
         it.note ? el("div", { class: "pi-note", text: it.note }) : null
       ]);
-      wrap.appendChild(el("div", { class: "plan-item eatable" + (on ? " on" : "") }, [cb, bodyDiv]));
+      wrap.appendChild(el("div", { class: "plan-item eatable" + (on ? " on" : "") + (it.offMenu ? " off" : "") }, [cb, bodyDiv]));
     });
 
     var planned = plan.totals || (plan.items || []).reduce(function (a, it) {

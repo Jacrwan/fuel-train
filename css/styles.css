@@ -165,6 +165,14 @@ button.mini.icon { width: 34px; padding: 0; }
 }
 .badge.usda { background: rgba(67,192,122,.18); color: var(--good); }
 .badge.ai   { background: rgba(229,161,58,.18); color: var(--warn); }
+.badge.off  { background: rgba(229,84,75,.2); color: var(--bad); }
+
+.dish-peek {
+  font-size: 12px; line-height: 1.6; color: var(--text-dim);
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  padding: 8px 10px; margin-bottom: 10px; max-height: 200px; overflow-y: auto;
+}
+.plan-item.off { opacity: .6; }
 
 /* ---------- exercise blocks ---------- */
 .ex { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: var(--s3); background: var(--surface); overflow: hidden; }
