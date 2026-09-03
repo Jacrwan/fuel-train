@@ -44,8 +44,6 @@
       onchange: function () { s.usdaKey = usda.value.trim(); App.store.save(); } });
     var anth = el("input", { type: "password", value: s.anthropicKey, placeholder: "sk-ant-…",
       onchange: function () { s.anthropicKey = anth.value.trim(); App.store.save(); } });
-    var model = el("input", { value: s.model || "claude-sonnet-4-6",
-      onchange: function () { s.model = model.value.trim() || "claude-sonnet-4-6"; App.store.save(); } });
 
     var st = s.stats;
     function statFld(k, label, type) {
@@ -65,7 +63,7 @@
     body.appendChild(el("p", { class: "muted small", html:
       'From <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>. ' +
       'Sent directly from your browser to api.anthropic.com. Personal use only — anyone with access to this device can read it.' }));
-    body.appendChild(el("label", { class: "field", style: "margin-top:10px" }, ["Model", model]));
+    body.appendChild(el("p", { class: "muted small", style: "margin-top:10px", text: "Model: Claude Haiku 4.5 (claude-haiku-4-5)" }));
 
     body.appendChild(el("hr", { class: "sep" }));
     body.appendChild(el("h3", { text: "Stats & goal (fed to the AI)" }));

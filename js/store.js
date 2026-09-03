@@ -62,7 +62,7 @@ window.App = window.App || {};
       settings: {
         usdaKey: "",
         anthropicKey: "",
-        model: "claude-sonnet-4-6",
+        model: "claude-haiku-4-5",
         macros: { calories: 2000, protein: 190, carbs: 175, fat: 60 },
         stats: {
           height: "6'0\"",

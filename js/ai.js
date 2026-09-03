@@ -7,9 +7,11 @@ window.App = window.App || {};
   "use strict";
   var ENDPOINT = "https://api.anthropic.com/v1/messages";
 
+  // Fixed model for every AI call in the app.
+  var MODEL = "claude-haiku-4-5";
+
   function cfg() {
-    var s = App.store.state.settings;
-    return { key: (s.anthropicKey || "").trim(), model: s.model || "claude-sonnet-4-6" };
+    return { key: (App.store.state.settings.anthropicKey || "").trim(), model: MODEL };
   }
 
   function rawCall(body) {

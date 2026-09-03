@@ -1,5 +1,5 @@
 /* Minimal service worker: precache the app shell, network-first for menu.json. */
-var CACHE = "fueltrain-shell-v7";
+var CACHE = "fueltrain-shell-v8";
 var SHELL = [
   ".",
   "index.html",
