@@ -1,6 +1,6 @@
 {
   "date": "2026-09-06",
-  "generated_at": "2026-09-06T16:00:25Z",
+  "generated_at": "2026-09-06T23:34:31Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -193,7 +193,8 @@
         "Banana",
         "Orange",
         "Assorted MIni Cheesecakes",
-        "Pecan Pie"
+        "Vegan Midnight Cookie",
+        "Strawberry Shortcake"
       ],
       "dinner": [
         "Chicken Fried Steak with Gravy",
@@ -205,7 +206,7 @@
         "Rotisserie Chicken",
         "Halal Ground Beef",
         "Pinto Beans",
-        "Grilled Eggplant",
+        "Steamed Broccoli",
         "Quinoa",
         "Cheese Pizza",
         "Hawaiian Pizza",
@@ -213,7 +214,7 @@
         "Puttanesca Penne Pasta",
         "Gluten Free Penne Pasta",
         "Roasted Brussels Sprouts",
-        "Assorted Dinner Rolls",
+        "Hawaiian Dinner Roll",
         "Bean Chili",
         "Tomato Bisque Soup",
         "Romaine Lettuce",
@@ -278,6 +279,7 @@
         "Roasted Broccoli and Red Pepper with Turmeric",
         "Caribbean Vegetable Blend",
         "Sweet Plantains",
+        "French Toast",
         "Grits",
         "Oatmeal",
         "Jasmine Rice",
@@ -294,11 +296,10 @@
         "Tomato Bisque Soup",
         "Salad Bar",
         "Mini Assorted Danish",
-        "Mini Butter Croissant",
+        "Assorted Mini Filled Croissant",
         "Assorted Mini Muffins",
-        "Black Forest Cake",
+        "Vegan Lemon Sugar Cookies",
         "Apple Pie",
-        "Assorted MIni Cheesecakes",
         "Chive Cream Cheese",
         "Whipped Cream Cheese",
         "Sliced Tomato",
@@ -321,6 +322,7 @@
         "Steamed Broccolini with Lemon",
         "Assorted Dinner Rolls",
         "Baked Smothered Chicken",
+        "Halal Rosemary Chicken",
         "Savory Lentils",
         "Baked Diced Sweet Potato",
         "Steamed Peas",
