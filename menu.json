@@ -1,6 +1,6 @@
 {
   "date": "2026-09-09",
-  "generated_at": "2026-09-09T17:04:10Z",
+  "generated_at": "2026-09-09T23:52:41Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -323,10 +323,9 @@
         "Thai Coconut Curry Beef Noodle Soup",
         "Thai Coconut Curry Noodle",
         "Medium Grain Rice",
-        "Lemongrass Chicken Potsticker",
+        "Teriyaki Chicken Potsticker",
         "Spare Smash Burger",
-        "Vegan Beyond Burger",
-        "Sweet Potato Garlic Fries",
+        "Chipotle Black Bean Burger",
         "Meat Lasagna",
         "Kale Lasagna with Mushroom",
         "Garlic Roasted Broccolini",
@@ -337,7 +336,6 @@
         "Squash Medley",
         "Roasted Peppers",
         "Pinto Beans",
-        "Grandma Mary's Chicken Soup",
         "Southwestern Corn Chowder",
         "Romaine Lettuce",
         "Baby Spinach",
@@ -381,8 +379,7 @@
         "Tuna Salad",
         "Egg Salad",
         "Chocolate Sheet Cake",
-        "Luscious Lemon Bar",
-        "Vegan Oatmeal Raisin Cookie"
+        "Luscious Lemon Bar"
       ],
       "dinner": [
         "Halal Szechuan-style Chicken",
@@ -396,10 +393,7 @@
         "Thai Coconut Curry Beef Noodle Soup",
         "Thai Coconut Curry Noodle",
         "Medium Grain Rice",
-        "Lemongrass Chicken Potsticker",
-        "Spare Smash Burger",
-        "Vegan Beyond Burger",
-        "Sweet Potato Garlic Fries",
+        "Teriyaki Chicken Potsticker",
         "Macaroni and Cheese Pasta",
         "Vegan Mac and Cheese Bake",
         "Garlic Roasted Broccolini",
@@ -455,7 +449,9 @@
         "Egg Salad",
         "Luscious Lemon Bar",
         "Vegan Oatmeal Raisin Cookie",
-        "Chocolate Sheet Cake"
+        "Chocolate Sheet Cake",
+        "Cheese Pizza",
+        "Vegetable Deluxe Pizza"
       ]
     },
     "Foothill": {
