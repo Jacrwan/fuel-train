@@ -1,6 +1,6 @@
 {
   "date": "2026-09-11",
-  "generated_at": "2026-09-11T16:56:08Z",
+  "generated_at": "2026-09-11T23:56:13Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -108,7 +108,6 @@
         "Steamed Broccoli and Cauliflower",
         "Garlic Toast",
         "Halal Chicken Breast",
-        "Plant Based Cheese Sauce",
         "Gluten Free Penne Pasta",
         "Brown Rice",
         "Squash Medley",
@@ -406,13 +405,11 @@
         "Sauteed Carrot and Kale",
         "Creamy Polenta",
         "Brown Rice",
-        "Pork Ramen Noodles",
-        "Vegetable Ramen",
+        "Thai Chili Lime Shrimp",
+        "Honey Garlic Tofu",
+        "Jasmine Rice",
+        "Steamed Peas",
         "Vegetable Eggroll",
-        "Pollock Sandwich",
-        "Chipotle Black Bean Burger",
-        "Creamy Coleslaw Salad",
-        "Halal Mustard Potato Salad",
         "Rigatoni Pasta",
         "Marinara Sauce",
         "Chicken Alfredo Sauce",
@@ -471,7 +468,9 @@
         "Egg Salad",
         "Boston Cream Pie",
         "Coconut Cream Pie",
-        "Vegan Chocolate Chip Cookie"
+        "Vegan Chocolate Chip Cookie",
+        "Cheese Pizza",
+        "Pepperoni Pizza"
       ]
     },
     "Foothill": {
