@@ -1,6 +1,6 @@
 {
   "date": "2026-09-14",
-  "generated_at": "2026-09-14T18:23:34Z",
+  "generated_at": "2026-09-15T00:22:23Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -328,8 +328,8 @@
         "Strawberry Jelly"
       ],
       "lunch": [
-        "Halal Seared Honey Beef",
-        "Teriyaki Pork Strips",
+        "Mandarin-style Orange Chicken",
+        "Mediterranean-style Roasted Chicken",
         "Fried Sweet and Sour Tofu",
         "Spicy Garlic Eggplant Stir Fry",
         "Stir Fried Bok Choy",
@@ -339,6 +339,8 @@
         "Baked Lemongrass Tofu",
         "Roasted Root Vegetables",
         "Edamame Potsticker",
+        "Shrimp Chow Mein",
+        "Halal Achiote Crusted Roast Beef",
         "Penne Pasta",
         "Marinara Sauce",
         "Alfredo Sauce",
@@ -347,7 +349,6 @@
         "Halal Ground Beef",
         "Vegan \"sausage\" Mixed Pepper Stir Fry",
         "Quinoa",
-        "Navy Beans",
         "Roasted Peppers",
         "Nancy Silverton's Sauteed Spinach with Lemon & Garlic",
         "Chicken Tikka Masala Soup",
@@ -395,7 +396,8 @@
         "Egg Salad",
         "Strawberry Shortcake",
         "Boston Cream Pie",
-        "Vegan Lemon Sugar Cookies",
+        "Vegan Oatmeal Raisin Cookie",
+        "Vegan Chocolate Chip Cookie",
         "Pumpkin Curry Pizza",
         "Mushroom Pizza"
       ],
@@ -408,7 +410,7 @@
         "Grilled Yellow Zucchini",
         "Sweet Plantains",
         "Lemongrass Pork Chop",
-        "Baked Lemongrass Tofu",
+        "General Tso Tofu",
         "Roasted Root Vegetables",
         "Jasmine Rice",
         "Edamame Potsticker",
