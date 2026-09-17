@@ -1,6 +1,6 @@
 {
   "date": "2026-09-17",
-  "generated_at": "2026-09-17T17:31:04Z",
+  "generated_at": "2026-09-17T23:57:20Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -49,7 +49,7 @@
         "Vegan Chicken Tenders",
         "Steamed Broccoli Cauliflower and Carrots",
         "Garlic Green Been Stir Fry",
-        "Southern Smothered Onion Potato",
+        "Kosher Mashed Potato",
         "Kosher Beef Chili Colorado",
         "Mexican Rice",
         "Yellow Tortilla Chip",
@@ -58,13 +58,11 @@
         "Creamy Primavera Sauce",
         "Vegan Primavera Sauce",
         "Roasted Carrots",
-        "Hawaiian Dinner Roll",
         "Halal Chicken Thigh",
         "Chickpea Noodle Soup",
-        "Root Vegetables",
         "Wild Rice",
-        "Sauteed Mushroom",
         "Roasted Potatoes",
+        "Sauteed Bok Choy",
         "Minestrone Soup",
         "Split Pea Soup",
         "Romaine Lettuce",
@@ -110,14 +108,13 @@
         "Southwest Beef Fajita Rice",
         "Seasoned Black Beans",
         "Cilantro and Lime Rice",
-        "Vegan Esquites",
+        "Esquites Salad",
         "Cilantro Lime Rice",
         "Sauteed Corn Pepper Mexicali",
         "Salsa Pico De Gallo",
         "Plant Based Cheese Sauce",
         "Halal Chicken Thigh Fajitas",
         "Baked Corn Tortilla Strips",
-        "Split Pea Soup",
         "Sliced Radish",
         "Shredded Green Cabbage",
         "Cilantro",
@@ -250,6 +247,7 @@
         "Guacamole",
         "Cinnamon Cereal Milk Cake",
         "Churro",
+        "Tres Leches Cake",
         "Mexican Inspired Soft Serve",
         "Horchata"
       ]
@@ -346,7 +344,6 @@
         "Paprika Rosemary Tofu",
         "Tuna Salad",
         "Egg Salad",
-        "Red Velvet Cookie",
         "Black Forest Cake",
         "Apple Pie"
       ],
