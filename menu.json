@@ -1,6 +1,6 @@
 {
   "date": "2026-09-28",
-  "generated_at": "2026-09-28T20:01:10Z",
+  "generated_at": "2026-09-29T01:32:44Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -9,6 +9,7 @@
         "Cheddar Eggs Scramble",
         "Fried Tater Tots",
         "Soyrizo Scramble",
+        "Kosher Mashed Potato",
         "Caribbean Vegetable Blend",
         "French Toast",
         "Brown Rice",
@@ -110,14 +111,14 @@
         "Penne Pasta",
         "Halal Beef Bolognese Sauce",
         "Lentil Bolognese Sauce",
-        "Nancy Silverton's Sauteed Spinach with Lemon & Garlic",
         "Garlic Toast",
+        "Sauteed Green Beans",
         "Halal Ground Beef",
         "Pinto Beans",
-        "Brown Rice",
         "Bean corn tomato salsa",
         "Baked Corn Tortilla Strips",
         "Baked Diced Sweet Potato",
+        "Cilantro and Lime Rice",
         "Tuscan Mushroom Bean Soup",
         "Split Pea Soup",
         "Romaine Lettuce",
@@ -303,8 +304,8 @@
         "Tuna Salad",
         "Egg Salad",
         "German Chocolate Cake",
-        "Luscious Lemon Bar",
-        "Vegan Chocolate Chip Cookie"
+        "Vegan Chocolate Chip Cookie",
+        "Boston Cream Pie"
       ]
     },
     "Crossroads": {
@@ -344,13 +345,13 @@
         "Marinara Sauce",
         "Alfredo Sauce",
         "Asparagus",
-        "French Dinner Roll",
-        "Halal Ground Beef",
+        "Hawaiian Dinner Roll",
+        "Halal Chicken Thigh",
         "Vegan \"sausage\" Mixed Pepper Stir Fry",
         "Quinoa",
         "Navy Beans",
         "Roasted Peppers",
-        "Baby Spinach",
+        "Steamed Peas and Carrots",
         "New England Clam Chowder",
         "Split Pea Soup",
         "Romaine Lettuce",
@@ -406,8 +407,7 @@
         "Marinara Sauce",
         "Alfredo Sauce",
         "Asparagus",
-        "Assorted Dinner Rolls",
-        "Halal Ground Beef",
+        "Halal Chicken Breast",
         "Vegan \"sausage\" Mixed Pepper Stir Fry",
         "Nancy Silverton's Sauteed Spinach with Lemon & Garlic",
         "Quinoa",
@@ -459,6 +459,7 @@
         "Lemon Leche Cake",
         "Boston Cream Pie",
         "Fruits of the Forest Pie",
+        "Vegan Lemon Sugar Cookies",
         "Cheese Pizza",
         "Godfather Pizza"
       ]
@@ -550,9 +551,6 @@
         "Steamed Broccoli",
         "Roasted Red Potatoes with Garlic",
         "Whole Wheat Dinner Roll",
-        "Vegan Beyond Burger",
-        "Halal American Beef Burger",
-        "Regular Fries",
         "Buffalo Cauliflower Pizza",
         "Pepperoni Pizza",
         "Halal Chicken Thigh Fajitas",
