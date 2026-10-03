@@ -1,6 +1,6 @@
 {
   "date": "2026-10-02",
-  "generated_at": "2026-10-02T18:15:00Z",
+  "generated_at": "2026-10-03T00:58:38Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -44,9 +44,11 @@
         "Balsamic Vinegar Glaze"
       ],
       "lunch": [
-        "Halal Ground Beef Taco",
-        "Sweet Potato Black Bean Taco",
-        "Street Taco",
+        "Halal Taco Seasoned Ground Beef",
+        "Black Bean & Sweet Potato Taco Filling",
+        "Tortilla White Corn 4.5 in",
+        "Onion Diced",
+        "Cilantro",
         "Cilantro and Lime Rice",
         "Seasoned Black Beans",
         "Salsa Pico De Gallo",
@@ -99,7 +101,6 @@
         "Dirty Converted Rice",
         "Fried Okra",
         "Braised Collard Greens",
-        "Cornbread",
         "Aurora Sauce",
         "Marinara Sauce",
         "Steamed Broccoli and Cauliflower",
@@ -328,9 +329,9 @@
         "Vegan Chicken Tenders",
         "Steak Fries",
         "Brown Rice",
+        "Steamed Peas",
         "Sauteed Mushroom Vegetable Blend",
         "Garlic Roasted Broccoli",
-        "Boiled Balsamic Pearl Onion Peas",
         "Vegan Coleslaw",
         "Thai Green Curry Shrimp",
         "Ginger Tofu",
@@ -340,7 +341,7 @@
         "Farfalle Pasta",
         "Creamy Pesto",
         "Marinara Sauce",
-        "Assorted Dinner Rolls",
+        "Hawaiian Dinner Roll",
         "Cranberry Glazed Chicken",
         "White Bean Soup with Garlic and Parsley",
         "Nancy Silverton's Sauteed Spinach with Lemon & Garlic",
@@ -348,8 +349,8 @@
         "Asparagus",
         "Root Vegetables",
         "Quinoa",
-        "Chicken Green Chile Chowder",
         "Minestrone Soup",
+        "Grandma Mary's Chicken Soup",
         "Romaine Lettuce",
         "Baby Spinach",
         "Base - Mixed Greens",
@@ -476,7 +477,7 @@
         "Cherry Pie",
         "Tuxedo Mousse Cake",
         "Cheese Pizza",
-        "Parmesan Meatball Pizza"
+        "Pepperoni Pizza"
       ]
     },
     "Foothill": {
@@ -519,8 +520,8 @@
         "Kosher Egg Salad",
         "Vegan Midnight Cookie",
         "Chocolate Chunk Brownies",
-        "Chicken Green Chile Chowder",
         "Minestrone Soup",
+        "Turkey and Bean Chili",
         "Yemeni Beef Stew",
         "Iskender Kebap Lentil",
         "Citrus Basmati Rice",
@@ -557,8 +558,8 @@
         "Egg Salad",
         "Vegan Midnight Cookie",
         "Chocolate Chunk Brownies",
-        "Chicken Green Chile Chowder",
         "Minestrone Soup",
+        "Turkey and Bean Chili",
         "Sauteed Thai Coconut Curry Chicken",
         "Sauteed Thai Curry Eggplant",
         "Steamed Broccoli",
