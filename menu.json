@@ -1,6 +1,6 @@
 {
   "date": "2026-10-03",
-  "generated_at": "2026-10-03T17:01:31Z",
+  "generated_at": "2026-10-04T00:23:08Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -89,17 +89,16 @@
         "Halal Tzatziki Sauce",
         "Hummus",
         "Halal Macaroni Cheeseburger",
-        "Vegan Mac and Cheese Bake",
         "Sauteed Green Beans",
         "Assorted Dinner Rolls",
+        "Marinara Sauce",
+        "Orechiette Pasta",
         "Baked Chicken Breast",
         "Kidney Beans",
         "Rice Congee",
         "Baked Diced Sweet Potato",
         "Sauteed Mushroom",
         "Steamed Broccoli",
-        "Southwestern Corn Chowder",
-        "Fiery Veggie Chili",
         "Romaine Lettuce",
         "Base - Mixed Greens",
         "Baby Spinach",
@@ -265,9 +264,9 @@
         "Omelet",
         "Mung Bean Patty",
         "Vegan Breakfast \"Sausage\" Patty",
-        "Chicken Apple Sausage",
         "Potato Wedges",
         "Bell Pepper Brussels Sprout Mushroom and Zucchini",
+        "Turkey Sausage Patty",
         "Cheese Pizza",
         "Hawaiian Pizza",
         "Baked Pineapple Glazed Ham",
@@ -393,9 +392,7 @@
         "Egg Salad",
         "Vegan Midnight Cookie",
         "Banana Creme Pie",
-        "Strawberry Shortcake",
-        "Hawaiian Pizza",
-        "Cheese Pizza"
+        "Strawberry Shortcake"
       ]
     },
     "Foothill": {
