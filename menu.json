@@ -1,6 +1,6 @@
 {
   "date": "2026-10-13",
-  "generated_at": "2026-10-13T19:46:11Z",
+  "generated_at": "2026-10-14T00:55:52Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -118,8 +118,6 @@
         "Brown Rice",
         "Sauteed Mushroom",
         "Baked Diced Sweet Potato",
-        "Roasted Peppers",
-        "Southwestern Corn Chowder",
         "Fiery Veggie Chili",
         "Romaine Lettuce",
         "Base - Mixed Greens",
@@ -296,8 +294,8 @@
         "Banana",
         "Orange",
         "Lemon Cream Shortcake",
-        "Apple Pie",
-        "Vegan Chocolate Chip Cookie"
+        "Luscious Lemon Bar",
+        "Vegan Oatmeal Raisin Cookie"
       ]
     },
     "Crossroads": {
@@ -394,25 +392,28 @@
         "Five-Spice Barley, Kale & Tofu",
         "Fried Orange Tofu",
         "Spiced Green Beans with Sesame",
-        "Steamed Broccoli",
+        "Sauteed Cabbage and Fermented Black Beans",
         "Medium Grain Rice",
         "Brown Rice",
-        "Vegetable Eggroll",
         "Chicken Pho",
-        "Vegan Pho",
-        "Vegetable Spring Rolls",
+        "Vegan Chicken Pho",
+        "Edamame Potsticker",
+        "Kalua Pork",
+        "Lemongrass Pork Chop",
+        "Sauteed Spicy Eggplant",
         "Chicken Corn Dog",
         "Vegan Hot Dog",
         "Housemade Lemon Pepper Potato Chips",
-        "Puttanesca Penne Pasta",
         "Meat Lasagna",
+        "Penne Pasta",
+        "Puttanesca Sauce",
         "Steamed Broccolini with Lemon",
-        "Assorted Dinner Rolls",
+        "French Dinner Roll",
         "Baked Smothered Chicken",
         "Savory Lentils",
         "Baked Diced Sweet Potato",
         "Steamed Peas",
-        "Sauteed Mushroom",
+        "Sauteed Asparagus Zucchini and Onion",
         "Chicken Tortilla Soup",
         "Fiery Veggie Chili",
         "Romaine Lettuce",
@@ -457,7 +458,7 @@
         "Tuna Salad",
         "Egg Salad",
         "Boston Cream Pie",
-        "Vegan Oatmeal Raisin Cookie",
+        "Vegan Lemon Sugar Cookies",
         "Triple Berry Crumble Bar"
       ]
     },
