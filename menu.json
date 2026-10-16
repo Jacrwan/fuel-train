@@ -1,6 +1,6 @@
 {
   "date": "2026-10-15",
-  "generated_at": "2026-10-15T17:38:55Z",
+  "generated_at": "2026-10-16T00:07:38Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -98,7 +98,7 @@
         "Sliced Pickle",
         "Vegan Chocolate Chip Cookie",
         "Black Forest Cake",
-        "Cherry Pie",
+        "Peach Pie",
         "Chocolate Soft Serve",
         "Vanilla Soft Serve"
       ],
@@ -114,6 +114,7 @@
         "Kosher Chicken Adobo Stew",
         "Sauteed Green Beans",
         "Jasmine Rice",
+        "Stir Fried Cabbage and Mushrooms",
         "Vegan Pancit",
         "Shrimp Pancit",
         "Halal Beef Kaldreta",
@@ -159,8 +160,6 @@
         "Steamed Carrots with Parsley",
         "Vegetable Spring Roll",
         "Thai Sweet Chili Sauce",
-        "Beef Bulgogi",
-        "Kimchi Fried Rice",
         "Chili Cheese Beef Hot Dog",
         "Vegan Chili Hot Dog",
         "Housemade BBQ Potato Chips",
@@ -341,7 +340,7 @@
         "Egg Salad",
         "Carrot Cake",
         "Vegan Midnight Cookie",
-        "French Cream Cheesecake"
+        "Black Forest Cake"
       ],
       "dinner": [
         "Filipino Styled Pork Adobo Stew",
@@ -415,9 +414,10 @@
         "Eggplant Baba Ganoush",
         "Bulgar Tabouleh Salad",
         "Halal Tzatziki Sauce",
+        "Fried Pakora",
         "Chili Cheese Beef Hot Dog",
-        "Vegan Italian \"Sausage\" Sandwich",
         "Waffle Fries",
+        "Vegan Hot Dog",
         "Chicken Parmesan Penne Pasta",
         "Chile Pasilla Rajas Spaghetti con Crema",
         "Italian Vegetable Blend",
