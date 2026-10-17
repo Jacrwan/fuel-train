@@ -1,6 +1,6 @@
 {
   "date": "2026-10-17",
-  "generated_at": "2026-10-17T16:10:12Z",
+  "generated_at": "2026-10-17T23:49:45Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -19,8 +19,6 @@
         "Sauteed Green Beans",
         "Assorted Dinner Rolls",
         "Halal Chicken Breast",
-        "Plant Based Cheese Sauce",
-        "Gluten Free Penne Pasta",
         "Steamed Broccoli",
         "Brown Rice",
         "Squash Medley",
@@ -141,10 +139,11 @@
         "Garlic Fried Rice",
         "Stir Fried Cabbage and Mushrooms",
         "Fried Over Medium Eggs",
-        "Grilled Longanisa",
         "Soyrizo Scramble",
         "Sauteed Green Beans",
         "Brown Rice",
+        "Chicken Apple Sausage",
+        "Roasted Potatoes",
         "Gluten Free Penne Pasta",
         "Halal Ground Beef",
         "Vegan \"sausage\" Mixed Pepper Stir Fry",
@@ -187,8 +186,8 @@
         "Sunflower Butter",
         "Banana",
         "Orange",
-        "Strawberry Shortcake",
-        "Vegan Midnight Cookie"
+        "Vegan Midnight Cookie",
+        "Cinnamon Cereal Milk Cake"
       ],
       "dinner": [
         "Grilled Cajun Salmon",
@@ -236,8 +235,8 @@
         "Red Apple",
         "Banana",
         "Orange",
-        "Strawberry Shortcake",
-        "Vegan Midnight Cookie"
+        "Vegan Midnight Cookie",
+        "Cinnamon Cereal Milk Cake"
       ]
     },
     "Crossroads": {
@@ -315,23 +314,21 @@
         "Thai Massaman Curry Tofu",
         "Lentil & Potato Curry",
         "Kerala Vegetable Curry",
-        "Aloo Chole",
         "Basmati Rice",
         "Brown Rice",
         "Indian-Spiced Lentil Hummus",
-        "Naan Bread",
-        "Rigatoni Pasta",
         "Marinara Sauce",
         "Alfredo Sauce",
         "Steamed Green Beans",
         "Assorted Dinner Rolls",
+        "Penne Pasta",
         "Halal Broccoli Beef",
         "Sweet Potato Chickpea Curry",
         "Long Grain Rice",
         "Honey Glazed Carrots",
         "Braised Mung Bean",
-        "Split Pea Soup",
         "Lobster Bisque",
+        "Ginataang Kalabasa",
         "Romaine Lettuce",
         "Baby Spinach",
         "Base - Mixed Greens",
@@ -447,7 +444,7 @@
         "Steamed Broccoli",
         "Buffalo Chicken Pizza",
         "Cheese Pizza",
-        "Halal Chicken Thigh",
+        "Chipotle Turkey Breast",
         "Braised Mung Bean",
         "Rice Stick Noodle",
         "Sauteed Green Beans",
