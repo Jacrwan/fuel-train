@@ -1,6 +1,6 @@
 {
   "date": "2026-10-20",
-  "generated_at": "2026-10-20T17:48:46Z",
+  "generated_at": "2026-10-21T00:24:38Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -53,7 +53,7 @@
         "Halal Fried Green Beans",
         "Kosher Jerk Baked Chicken",
         "Steamed Peas and Carrots",
-        "Black Bean and Corn Salad",
+        "Seasoned Black Beans",
         "Long Grain Rice",
         "Rigatoni Pasta",
         "Pesto Alfredo Sauce",
@@ -117,7 +117,7 @@
         "Pesto Alfredo Sauce",
         "Cacciatore Sauce",
         "Roasted Zucchini Mushroom",
-        "Assorted Dinner Rolls",
+        "Baguette with Herb Oil",
         "Halal Ground Beef",
         "New Orleans-style Black Eyed Beans Corn and Tomato Stew",
         "Brown Rice",
@@ -346,6 +346,11 @@
         "Miso Braised Mushroom",
         "Brown Rice and Quinoa",
         "Vegetable Spring Roll",
+        "Orechiette Pasta",
+        "Alfredo Sauce",
+        "Marinara Sauce",
+        "Steamed Peas",
+        "Assorted Dinner Rolls",
         "Halal Chicken Breast",
         "Vegan \"sausage\" Mixed Pepper Stir Fry",
         "Himalayan Red Rice",
@@ -395,12 +400,11 @@
         "Hummus",
         "Peach",
         "Nectarine",
-        "Luscious Lemon Bar",
         "Apple Pie",
         "Boston Cream Pie",
-        "Buffalo Chicken Pizza",
-        "Buffalo Cauliflower Pizza",
-        "Parmesan Cheese"
+        "Raspberry Mini Beignet",
+        "Luscious Lemon Bar",
+        "Vegan Oatmeal Raisin Cookie"
       ],
       "dinner": [
         "Lemon Ricotta Chicken",
