@@ -1,6 +1,6 @@
 {
   "date": "2026-10-21",
-  "generated_at": "2026-10-21T17:55:41Z",
+  "generated_at": "2026-10-22T00:28:09Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -51,7 +51,6 @@
         "Halal Creamy Polenta",
         "Brown Rice",
         "Garlic Roasted Broccolini",
-        "Roasted Eggplant",
         "Kosher Sauteed Ground Beef",
         "Cilantro and Lime Rice",
         "Roasted Mexican Vegetable Blend",
@@ -109,8 +108,8 @@
         "Halal Apple Cider Glazed Chicken",
         "Garbanzo Beans and Potato Stew",
         "Wild Pilaf Rice",
-        "Roasted Sweet Potato",
         "Garlic Green Beans",
+        "Sauteed Corn Onion and Squash",
         "Kosher Chicken Fajita",
         "Cilantro and Lime Rice",
         "Roasted Mexican Vegetable Blend",
@@ -207,12 +206,12 @@
         "Halal Chicken Thigh",
         "Cheese Pizza",
         "Pepperoni Pizza",
-        "Orechiette Pasta",
         "Gluten Free Penne Pasta",
         "Chicken Alfredo Sauce",
         "Arrabiata Sauce",
         "Garlic Roasted Cauliflower",
         "Assorted Dinner Rolls",
+        "Farfalle Pasta",
         "Turkey and Bean Chili",
         "Fiery Veggie Chili",
         "Romaine Lettuce",
@@ -245,9 +244,9 @@
         "Sunflower Butter",
         "Banana",
         "Orange",
-        "Chocolate Sheet Cake",
-        "Key Lime Pie",
-        "Vegan Lemon Sugar Cookies"
+        "Lemon Cream Shortcake",
+        "Coconut Cream Pie",
+        "Vegan Oatmeal Raisin Cookie"
       ],
       "dinner": [
         "Korean BBQ-style Chicken Tenders",
@@ -343,7 +342,7 @@
         "Lemongrass Chicken Potsticker",
         "California Spare Cheeseburger",
         "Vegan Malibu Burger",
-        "Waffle-Cut Sweet Potato Fries",
+        "Tuscan Bean Penne",
         "Halal Ground Beef",
         "Gluten Free Mac & Cheese",
         "Squash Medley",
@@ -410,7 +409,7 @@
         "Lemongrass Chicken Potsticker",
         "Buffalo Chicken Sandwich",
         "Vegan Malibu Burger",
-        "Sweet Potato Fries",
+        "Waffle-Cut Sweet Potato Fries",
         "Blue Cheese Dressing",
         "Meat Lasagna",
         "Tuscan Bean Penne",
@@ -490,7 +489,6 @@
         "Flour Tortilla",
         "Pork Linguica Sausage",
         "Turkey Sausage Link",
-        "Griddled Pork Ham",
         "Pork Sausage Patty"
       ],
       "lunch": [
