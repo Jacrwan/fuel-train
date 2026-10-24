@@ -1,6 +1,6 @@
 {
   "date": "2026-10-23",
-  "generated_at": "2026-10-23T17:44:59Z",
+  "generated_at": "2026-10-24T00:20:47Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -318,7 +318,7 @@
       "lunch": [
         "Chicken Breast with Caper Sauce",
         "Baked Tofu Piccata",
-        "Roasted Red Potatoes with Garlic",
+        "Mashed Yukon Potato",
         "Brown Rice",
         "Steamed Peas and Carrots",
         "Garlic Roasted Broccoli",
@@ -339,8 +339,8 @@
         "Sauteed Corn Pepper Mexicali",
         "Vegan Sunflower Sour Cream",
         "Jalapeno Rings",
-        "Broccoli Cheddar Soup",
         "Tuscan Mushroom Bean Soup",
+        "Chicken Tortilla Soup",
         "Base - Mixed Greens",
         "Baby Spinach",
         "Romaine Lettuce",
@@ -390,15 +390,15 @@
         "Baked Dijon Herb Crusted Salmon",
         "White Beans with Oregano and Garlic",
         "Wild Rice Tofu Stuffed Peppers",
-        "Roasted Asparagus",
         "Roasted Asparagus Mushroom Pepper and Zucchini",
         "Spiced Couscous",
-        "Brown Rice",
+        "Steamed Broccoli",
+        "Himalayan Red Rice",
         "Korean Style Fried Chicken",
         "Tofu Mushroom Stir Fry",
-        "Sweet Chili Roasted Brussels Sprouts",
         "Jasmine Rice",
-        "Kimchi Chicken Potsticker",
+        "Sauteed Garlic Baby Carrots and Snap Peas",
+        "Chicken Potsticker",
         "Chicken Salad Sandwich",
         "Vegan Chicken Salad Sandwich",
         "Housemade Potato Chips",
@@ -416,7 +416,7 @@
         "Vegan Sunflower Sour Cream",
         "Jalapeno Rings",
         "Tuscan Mushroom Bean Soup",
-        "Broccoli Cheddar Soup",
+        "Chicken Tortilla Soup",
         "Base - Mixed Greens",
         "Baby Spinach",
         "Romaine Lettuce",
@@ -500,7 +500,6 @@
         "Italian Dressing",
         "Poppy Seed Dressing",
         "Sliced Red Beets",
-        "Kosher Egg Salad",
         "Vegan Lemon Sugar Cookies",
         "Chocolate Sheet Cake",
         "Turkey and Bean Chili",
@@ -562,7 +561,9 @@
         "Tortilla Strips",
         "Cilantro",
         "Shredded Vegan Cheese",
-        "Diced Tomato"
+        "Diced Tomato",
+        "Cheese Pizza",
+        "Pepperoni Pizza"
       ]
     }
   }
