@@ -1,6 +1,6 @@
 {
   "date": "2026-10-25",
-  "generated_at": "2026-10-25T16:58:38Z",
+  "generated_at": "2026-10-25T23:54:23Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -83,9 +83,7 @@
       "dinner": [
         "Halal Teriyaki Chicken Thigh",
         "Fried Teriyaki Tofu",
-        "Fried Orange Tofu",
         "Long Grain Rice",
-        "Garlic Roasted Gai Lan",
         "Steamed Carrots with Parsley",
         "Kosher Chicken Pozole",
         "Yellow Tortilla Chip",
@@ -99,10 +97,9 @@
         "Hawaiian Dinner Roll",
         "Halal North African-style Roasted Chicken",
         "Kidney Beans",
-        "Brown Rice",
-        "Stir Fried Cabbage",
-        "Baked Diced Sweet Potato",
         "Caribbean Vegetable Blend",
+        "Steamed Potato",
+        "Wild Rice",
         "Native Three Sisters Bean Soup",
         "Broccoli Cheddar Soup",
         "Romaine Lettuce",
@@ -196,8 +193,10 @@
         "Sunflower Butter",
         "Banana",
         "Orange",
-        "Black Forest Cake",
-        "Apple Pie"
+        "Assorted Mini Cheesecakes",
+        "Strawberry Shortcake",
+        "Peach Pie",
+        "Custard Pie"
       ],
       "dinner": [
         "Piri Piri Roasted Chicken",
@@ -243,29 +242,32 @@
         "Paprika Rosemary Tofu",
         "Tuna Salad",
         "Egg Salad",
-        "Black Forest Cake",
-        "Apple Pie"
+        "Strawberry Shortcake",
+        "Assorted Mini Cheesecakes",
+        "Custard Pie",
+        "Peach Pie"
       ]
     },
     "Crossroads": {
       "breakfast": [],
       "lunch": [
-        "Frittata",
         "Scrambled Eggs",
         "Mung Bean Patty",
         "Turkey Sausage Link",
-        "Soyrizo with Peppers and Onion",
-        "Fried Tater Tots",
-        "Berry Granola Plantains",
-        "Garlic Roasted Broccolini",
+        "Home Fries",
         "Cheese Pizza",
         "Ham and Artichoke Pizza",
         "Roasted Lamb Leg",
         "Vegan Celebration \"Roast\"",
         "Vegan Creamy Mushroom Gravy",
         "Mashed Yukon Potato",
-        "Roasted Zucchini Mushroom",
         "Roasted Root Veggies",
+        "Sauteed Mushroom Vegetable Blend",
+        "Refried Beans",
+        "Chicken Enchiladas with Red Sauce",
+        "Mexican Rice",
+        "Roasted Pork",
+        "Halal North African-style Roasted Chicken",
         "French Toast",
         "French Toast Sticks",
         "Grits",
