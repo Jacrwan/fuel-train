@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "generated_at": "2026-11-01T18:17:32Z",
+  "generated_at": "2026-11-02T01:19:35Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -145,9 +145,9 @@
       "lunch": [
         "Halal Vindaloo Chicken Thigh",
         "Lentil Vindaloo",
-        "Basmati Rice",
         "Garbanzo Bean and Squash Vindaloo",
         "Naan Bread",
+        "Coconut Rice",
         "Scrambled Eggs",
         "Mushroom and Kale Eggs Scramble",
         "Fried Tater Tots",
@@ -281,7 +281,6 @@
         "Roasted Broccoli and Red Pepper with Turmeric",
         "Sweet Plantains",
         "French Toast",
-        "French Toast Sticks",
         "Grits",
         "Oatmeal",
         "Jasmine Rice",
@@ -295,7 +294,7 @@
         "Vanilla Overnight Oats",
         "Vegan Scrambled Egg",
         "Minestrone Soup",
-        "Tomato Bisque Soup",
+        "Chicken Tortilla Soup",
         "Base - Mixed Greens",
         "Romaine Lettuce",
         "Sliced Red Beets",
@@ -327,9 +326,9 @@
         "Assorted Mini Donuts",
         "Assorted Mini Muffins",
         "Mini Assorted Danish",
-        "Peach Pie",
         "Strawberry Shortcake",
-        "Chocolate Hazelnut Beignets",
+        "Pumpkin Pie",
+        "Red Velvet Cookie",
         "Chive Cream Cheese",
         "Whipped Cream Cheese",
         "Sliced Tomato",
