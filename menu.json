@@ -1,6 +1,6 @@
 {
   "date": "2026-11-04",
-  "generated_at": "2026-11-04T20:18:42Z",
+  "generated_at": "2026-11-05T02:01:44Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -345,8 +345,7 @@
         "Vegan Coleslaw",
         "Meat Lasagna",
         "Tuscan Bean Penne",
-        "Poached Balsamic Pearl Onions",
-        "Hawaiian Dinner Roll",
+        "Assorted Dinner Rolls",
         "Gluten Free Penne Pasta",
         "Lentil Marinara Sauce",
         "Halal Beef Marinara Sauce",
@@ -396,9 +395,10 @@
         "Paprika Rosemary Tofu",
         "Tuna Salad",
         "Egg Salad",
-        "Peach Pie",
-        "Red Velvet Cookie",
-        "Chocolate Chunk Brownies"
+        "Apple Pie",
+        "Fruits of the Forest Pie",
+        "Chocolate Chunk Brownies",
+        "Strawberry Shortcake"
       ],
       "dinner": [
         "BBQ Beef Brisket",
@@ -412,6 +412,9 @@
         "Thai Coconut Curry Beef Noodle Soup",
         "Thai Coconut Curry Noodle",
         "Lemongrass Chicken Potsticker",
+        "Vegan Jambalaya",
+        "Andouille Sausage Chicken and Shrimp Jambalaya",
+        "Cajun Tofu with Chimichurri",
         "BBQ Gardein Tenders",
         "Nashville Hot-style Chicken Tenders",
         "Housemade Lemon Pepper Potato Chips",
@@ -419,7 +422,6 @@
         "Meat Lasagna",
         "Tuscan Bean Penne",
         "Poached Balsamic Pearl Onions",
-        "Hawaiian Dinner Roll",
         "Gluten Free Penne Pasta",
         "Lentil Marinara Sauce",
         "Halal Beef Marinara Sauce",
