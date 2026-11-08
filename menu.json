@@ -1,6 +1,6 @@
 {
   "date": "2026-11-07",
-  "generated_at": "2026-11-07T17:57:21Z",
+  "generated_at": "2026-11-08T01:09:53Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -10,7 +10,6 @@
         "Gardein Strip Fajitas",
         "Mexican Rice",
         "Roasted Mexican Vegetable Blend",
-        "Salsa Pico De Gallo",
         "Refried Beans",
         "Flour Tortilla",
         "Scrambled Eggs",
@@ -22,12 +21,12 @@
         "Sauteed Green Beans",
         "Assorted Dinner Rolls",
         "Fettucini Alfredo Pasta",
-        "Baked Chicken Breast",
         "Kidney Beans",
         "Rice Congee",
         "Steamed Broccoli",
         "Baked Diced Sweet Potato",
         "Sauteed Mushroom",
+        "Halal Chicken Thigh",
         "Southwestern Corn Chowder",
         "Fiery Veggie Chili",
         "Non Fat Plain Greek Yogurt",
@@ -88,9 +87,10 @@
         "Medium Grain Rice",
         "Italian Vegetable Blend",
         "Halal Macaroni Cheeseburger",
-        "Vegan Mac and Cheese Bake",
         "Sauteed Green Beans",
         "Assorted Dinner Rolls",
+        "Penne Pasta",
+        "Halal Chipotle Sauce",
         "Gluten Free Penne Pasta",
         "Halal Beef Marinara Sauce",
         "Housemade Marinara Sauce",
@@ -259,8 +259,9 @@
         "Red Apple",
         "Banana",
         "Orange",
-        "Strawberry Shortcake",
-        "Vegan Midnight Cookie"
+        "Cinnamon Cereal Milk Cake",
+        "Peach Pie",
+        "Assorted Mini Cheesecakes"
       ]
     },
     "Crossroads": {
@@ -346,17 +347,20 @@
         "Jasmine Rice",
         "Brown Rice",
         "Vegetable Eggroll",
+        "PoBoy Tempura Cauliflower Sandwich",
+        "Shrimp PoBoy Sandwich",
+        "Creole Coleslaw",
         "Rotini Pasta",
         "Pesto Alfredo Sauce",
         "Marinara Sauce",
         "Asparagus",
         "Assorted Dinner Rolls",
         "Halal Ground Beef",
-        "Blacked Eyed Peas Stew",
         "Hominy",
         "Roasted Cumin Butternut Squash",
         "Brussels Sprouts",
         "Roasted Peppers",
+        "Vegan Wellness Stew",
         "Split Pea Soup",
         "Lobster Bisque",
         "Romaine Lettuce",
@@ -402,9 +406,7 @@
         "Egg Salad",
         "Custard Pie",
         "Carrot Cake",
-        "Vegan Midnight Cookie",
-        "Cheese Pizza",
-        "Bacon and Kale Pizza"
+        "Vegan Midnight Cookie"
       ]
     },
     "Foothill": {
