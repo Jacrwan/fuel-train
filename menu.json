@@ -1,6 +1,6 @@
 {
   "date": "2026-11-10",
-  "generated_at": "2026-11-10T20:18:11Z",
+  "generated_at": "2026-11-11T01:44:04Z",
   "source": "css",
   "menu": {
     "Café 3": {
@@ -52,7 +52,6 @@
         "Latin Coleslaw Salad",
         "Corn Tortilla",
         "Grilled Cajun Salmon",
-        "Classic Eggplant Squash Ratatouille",
         "Wild Pilaf Rice",
         "Vegan Creole Potato Salad",
         "Roasted Carrots",
@@ -129,7 +128,7 @@
         "Cucumber Raita",
         "Tomato Chutney",
         "Mixed Pickles",
-        "Kheer",
+        "Coconut Kheer",
         "Carrot Halwa",
         "Vegan Chai Inspired Ice cream",
         "Mango Lassi"
@@ -248,7 +247,7 @@
         "Cucumber Raita",
         "Tomato Chutney",
         "Mixed Pickles",
-        "Kheer",
+        "Coconut Kheer",
         "Carrot Halwa",
         "Gulab Jamun",
         "Vegan Chai Inspired Ice cream",
@@ -372,7 +371,7 @@
         "Mixed Pickles",
         "Gulab Jamun",
         "Carrot Halwa",
-        "Kheer",
+        "Coconut Kheer",
         "Vegan Chai Inspired Ice cream",
         "Mango Lassi"
       ]
@@ -451,7 +450,7 @@
         "Tomato Chutney",
         "Mixed Pickles",
         "Mango Lassi",
-        "Kheer",
+        "Coconut Kheer",
         "Vegan Chai Inspired Ice cream",
         "Carrot Halwa",
         "Gulab Jamun",
